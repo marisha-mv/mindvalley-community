@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Mindvalley Community Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,0,600;9..144,0,700;9..144,1,400;9..144,1,500;9..144,1,600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f2ea; --paper-2:#efe9dd; --ink:#1c1b18; --ink-soft:#4a463d;
+    --line:#d8cfbe; --accent:#0e6b62; --accent-soft:#0e6b6212; --accent-line:#0e6b6240;
+    --gold:#b07a2c;
+    --display:'Fraunces',Georgia,serif; --body:'Archivo',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.62;-webkit-font-smoothing:antialiased;padding:0 24px 90px;}
+  .wrap{max-width:880px;margin:0 auto;}
+
+  /* masthead */
+  header.mast{padding:72px 0 36px;border-bottom:2px solid var(--ink);}
+  .kicker{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:24px;}
+  h1{font-family:var(--display);font-weight:600;font-size:clamp(2.7rem,6.5vw,5rem);line-height:.95;letter-spacing:-.025em;margin-bottom:22px;}
+  h1 em{font-style:italic;color:var(--accent);}
+  .lede{font-size:clamp(1.05rem,2vw,1.25rem);color:var(--ink-soft);max-width:60ch;}
+  .meta{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px;}
+  .tag{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding:6px 12px;border:1px solid var(--line);border-radius:100px;color:var(--ink-soft);}
+
+  /* contents */
+  nav.toc{padding:34px 0;border-bottom:1px solid var(--line);}
+  nav.toc .lbl{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:18px;}
+  nav.toc ol{list-style:none;counter-reset:t;columns:2;column-gap:46px;}
+  nav.toc li{counter-increment:t;padding:7px 0;border-bottom:1px dotted var(--line);break-inside:avoid;}
+  nav.toc a{color:var(--ink);text-decoration:none;font-size:.96rem;display:flex;gap:12px;align-items:baseline;}
+  nav.toc a:hover{color:var(--accent);}
+  nav.toc a::before{content:counter(t,decimal-leading-zero);font-family:var(--display);font-style:italic;color:var(--gold);font-size:.9rem;}
+
+  section{padding:50px 0;border-bottom:1px solid var(--line);}
+  .sec-num{font-family:var(--display);font-style:italic;color:var(--gold);font-size:1rem;display:block;margin-bottom:8px;}
+  h2{font-family:var(--display);font-weight:600;font-size:clamp(1.7rem,3.6vw,2.5rem);letter-spacing:-.015em;line-height:1.04;margin-bottom:20px;}
+  h3{font-family:var(--body);font-weight:700;font-size:1.05rem;letter-spacing:.01em;margin:28px 0 8px;color:var(--ink);}
+  p{margin-bottom:14px;max-width:68ch;color:var(--ink-soft);}
+  p strong{color:var(--ink);font-weight:600;}
+  .big{font-size:1.14rem;color:var(--ink);}
+  em.it{font-style:italic;}
+
+  .pull{font-family:var(--display);font-size:clamp(1.3rem,3vw,1.85rem);line-height:1.25;color:var(--ink);font-weight:500;border-left:3px solid var(--accent);padding:4px 0 4px 22px;margin:26px 0;max-width:58ch;}
+
+  /* platform callout */
+  .fm{background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:14px;padding:16px 20px;margin:20px 0;}
+  .fm .fmh{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+  .fm .fmh::before{content:"◆";font-size:.7rem;}
+  .fm p{margin:0;color:var(--ink);font-size:.96rem;max-width:none;}
+  .fm p+p{margin-top:8px;}
+
+  /* community cards */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px;}
+  .card{background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:20px;}
+  .card .ic{font-family:var(--display);font-size:1.4rem;color:var(--accent);font-weight:600;}
+  .card h4{font-family:var(--body);font-weight:700;font-size:1.05rem;margin:6px 0 4px;color:var(--ink);}
+  .card span{font-size:.82rem;color:var(--ink-soft);}
+
+  /* tiers */
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px;}
+  .tier{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff;}
+  .tier b{display:block;color:var(--accent);font-size:.95rem;margin-bottom:4px;}
+  .tier span{font-size:.84rem;color:var(--ink-soft);}
+
+  ol.rhythm{list-style:none;counter-reset:r;margin-top:8px;}
+  ol.rhythm li{counter-increment:r;position:relative;padding:16px 0 16px 56px;border-top:1px solid var(--line);}
+  ol.rhythm li:first-child{border-top:none;}
+  ol.rhythm li::before{content:counter(r,decimal-leading-zero);position:absolute;left:0;top:16px;font-family:var(--display);font-style:italic;color:var(--gold);font-size:1.3rem;}
+  ol.rhythm li b{display:block;color:var(--ink);font-size:1.04rem;font-weight:700;margin-bottom:3px;}
+  ol.rhythm li small{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700;}
+  ol.rhythm p{margin:4px 0 0;max-width:64ch;}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 4px;}
+  .chip{background:#fff;border:1px solid var(--line);border-radius:100px;padding:8px 15px;font-size:.88rem;color:var(--ink);font-weight:500;}
+
+  /* do/dont */
+  .dd{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;}
+  .dd .col{border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:#fff;}
+  .dd .col h5{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin-bottom:12px;}
+  .dd .yes h5{color:var(--accent);} .dd .no h5{color:#a4452e;}
+  .dd ul{list-style:none;} .dd li{font-size:.92rem;color:var(--ink-soft);padding:6px 0 6px 20px;position:relative;}
+  .dd .yes li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:700;}
+  .dd .no li::before{content:"✕";position:absolute;left:0;color:#a4452e;font-weight:700;}
+
+  /* feature table */
+  table.fmtbl{width:100%;border-collapse:collapse;margin-top:14px;font-size:.92rem;}
+  table.fmtbl th{text-align:left;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;padding:10px 12px;border-bottom:2px solid var(--line);}
+  table.fmtbl td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-soft);}
+  table.fmtbl td:first-child{color:var(--ink);font-weight:600;width:34%;}
+
+  /* KPI */
+  .kpi-group{margin-top:24px;}
+  .kpi-group .gh{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+  .kpi-group .gh::after{content:"";flex:1;height:1px;background:var(--line);}
+  .kpi-list{display:grid;grid-template-columns:1fr 1fr;gap:0 30px;}
+  .kpi{padding:11px 0;border-bottom:1px solid var(--line);}
+  .kpi b{display:block;color:var(--ink);font-weight:700;font-size:.98rem;}
+  .kpi span{font-size:.85rem;color:var(--ink-soft);}
+  .cohort{margin-top:14px;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:14px 18px;font-size:.9rem;color:var(--ink-soft);}
+  .cohort b{color:var(--ink);}
+  .months{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+  .months span{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:.85rem;background:#fff;}
+
+  ul.prin{list-style:none;margin-top:8px;}
+  ul.prin li{padding:13px 0 13px 26px;position:relative;border-bottom:1px solid var(--line);color:var(--ink);font-size:1rem;}
+  ul.prin li:last-child{border-bottom:none;}
+  ul.prin li::before{content:"";position:absolute;left:0;top:21px;width:9px;height:9px;background:var(--accent);transform:rotate(45deg);}
+
+  footer{padding:44px 0 0;color:var(--ink-soft);font-size:.85rem;}
+  footer .rule{height:2px;background:var(--ink);margin-bottom:18px;}
+
+  .reveal{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards;}
+  @keyframes rise{to{opacity:1;transform:none;}}
+
+  @media(max-width:640px){
+    .grid,.kpi-list,.dd,.tiers{grid-template-columns:1fr;}
+    nav.toc ol{columns:1;}
+    body{padding:0 18px 60px;}
+  }
+  @media print{body{background:#fff;}.reveal{animation:none;opacity:1;transform:none;}section,.card,.fm,.dd .col{break-inside:avoid;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mast reveal">
+    <div class="kicker">Mindvalley × FinerMinds · The Operator's Guide</div>
+    <h1>The Community<br><em>Playbook.</em></h1>
+    <p class="lede">How we run community at Mindvalley. If you want to run a community here, this is what you do, how you show up, and what you're held to. Read it once, run it forever.</p>
+    <div class="meta">
+      <span class="tag">Strategy</span><span class="tag">Standards</span>
+      <span class="tag">Operating Rhythm</span><span class="tag">Platform</span><span class="tag">KPIs</span>
+    </div>
+  </header>
+
+  <nav class="toc reveal">
+    <div class="lbl">Contents</div>
+    <ol>
+      <li><a href="#s1">The strategy</a></li>
+      <li><a href="#s2">The operator mindset</a></li>
+      <li><a href="#s3">The territory &amp; structure</a></li>
+      <li><a href="#s4">How you show up</a></li>
+      <li><a href="#s5">How you dress &amp; present</a></li>
+      <li><a href="#s6">How you nurture</a></li>
+      <li><a href="#s7">The operating rhythm</a></li>
+      <li><a href="#s8">The live call</a></li>
+      <li><a href="#s90">The 90-day content plan</a></li>
+      <li><a href="#s100">The tech layer: build your AI</a></li>
+      <li><a href="#s9">The FinerMinds toolkit</a></li>
+      <li><a href="#s10">What's expected of you</a></li>
+      <li><a href="#s11">The KPIs</a></li>
+      <li><a href="#s12">What good looks like</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1 -->
+  <section id="s1" class="reveal">
+    <span class="sec-num">01 — The strategy</span>
+    <h2>Community is how we retain</h2>
+    <p class="big">Members don't buy the community. They buy a pathway — the quests, the meditations, and the community together. Community is one part of that, and its job is clear: <strong>community is our answer to retention.</strong> It's what makes members stay.</p>
+    <p>It does that four ways. It makes people feel <strong>seen</strong>. It <strong>collects data</strong> — what members care about, what they want to learn, the questions they're asking. The community manager <strong>guides</strong> — answering those questions and pointing members to the right quests, summits and products. And it's <strong>marketing</strong>: today we lean on email to sell the next offer; the community becomes the channel that does it instead.</p>
+    <p class="pull">Retention, data, guidance, and a marketing channel — all in one room. That's why getting it right matters.</p>
+    <p>Nurture members well here and they stay, they go deeper into the quests, and they buy what comes next — without an email blast doing the work.</p>
+  </section>
+
+  <!-- 2 -->
+  <section id="s2" class="reveal">
+    <span class="sec-num">02 — The operator mindset</span>
+    <h2>Run it like it's yours</h2>
+    <p class="big">This role is for autonomous operators. You are not a moderator waiting to be told what to post. You own your community's agenda, curriculum and calendar, and you run it like a founder runs a product.</p>
+    <p>That means you set the plan, you know what's coming, you build the curriculum, you book the people, and you hold yourself to the numbers. The community succeeds or fails on your initiative — and you're rewarded on the outcome.</p>
+  </section>
+
+  <!-- 3 -->
+  <section id="s3" class="reveal">
+    <span class="sec-num">03 — The territory &amp; structure</span>
+    <h2>The communities</h2>
+    <p>There are two kinds of community, and they grow differently.</p>
+    <h3>The paid pathway communities</h3>
+    <p>Four communities, each mapped to a pathway. These are <strong>paid</strong> — you join a pathway to get in. Today the work is split across two managers; each owns their communities end-to-end.</p>
+    <div class="grid">
+      <div class="card"><span class="ic">✦</span><h4>Longevity &amp; Wellness</h4><span>Health, energy, the long game</span></div>
+      <div class="card"><span class="ic">◇</span><h4>Mindset &amp; Self-Mastery</h4><span>Inner work, manifesting, identity</span></div>
+      <div class="card"><span class="ic">❍</span><h4>Relationships &amp; Community</h4><span>Connection, love, belonging</span></div>
+      <div class="card"><span class="ic">△</span><h4>Exponential Founders, Experts &amp; Authority</h4><span>Business, influence, building</span></div>
+    </div>
+    <h3>The free entrepreneurship community — velvet rope</h3>
+    <p>Alongside the paid communities, we're launching one <strong>free entrepreneurship community</strong>, and it grows differently: <strong>apply-only</strong>. You apply to get in — think Clubhouse — and once you're in, you get <strong>three referrals</strong> to invite three other entrepreneurs, who each have to apply too. The model is Raya and Clubhouse: scale a high-quality layer through <strong>network effect</strong>, where the application keeps the bar high and the referrals do the growing.</p>
+    <div class="fm">
+      <div class="fmh">On FinerMinds</div>
+      <p>Each community is its own <strong>branded space</strong>, and you're the <strong>Admin</strong>. Use <strong>sub-groups</strong> to run cohorts, challenges and pods within a community.</p>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section id="s4" class="reveal">
+    <span class="sec-num">04 — How you show up</span>
+    <h2>Present, warm, and unmistakably you</h2>
+    <p class="big">You are the face of the community. The energy you bring is the energy members mirror back. Show up daily, in voice and in presence — a quiet community is a dying one.</p>
+    <h3>Your voice &amp; energy</h3>
+    <p>Warm, direct, encouraging. You celebrate loudly, you ask real questions, you never talk down. You embody your pathway — the Longevity manager lives the protocols; the Founders manager thinks like a builder. Members should be able to feel which community they're in from the tone alone.</p>
+    <p>And it's not just the words — it's the <strong>energy</strong> behind them. There has to be a feel in the room that makes people <em class="it">want</em> to be part of the conversation. Your language should carry that energy: alive, magnetic, the kind people lean into. A flat, functional tone empties a room as fast as silence does.</p>
+    <h3>Be visible &amp; responsive</h3>
+    <p>Reply, react, and acknowledge fast. A member who posts a win and hears nothing back has just learned the room is empty. Your fingerprints should be all over the feed every day.</p>
+    <div class="fm">
+      <div class="fmh">On FinerMinds</div>
+      <p>Live in the <strong>activity feed</strong> daily — react and reply so members see you. Use <strong>1:1 and group chat</strong> for the personal touches that don't belong in public. Keep your own <strong>profile</strong> complete and human — photo, bio, interests — you set the standard members follow.</p>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section id="s5" class="reveal">
+    <span class="sec-num">05 — How you dress &amp; present</span>
+    <h2>Show up on camera like the brand</h2>
+    <p class="big">The marquee live calls are author-led (see §8) — but you'll still be on camera plenty: welcomes, pod sessions, casual check-ins. Whenever you appear, you represent Mindvalley, and members judge the community by how you present. Hold a premium bar.</p>
+    <div class="dd">
+      <div class="col yes">
+        <h5>Do</h5>
+        <ul>
+          <li>Dress clean, intentional and brand-aligned — elevated-casual, polished, never sloppy</li>
+          <li>Frame at eye level with a tidy, on-brand background</li>
+          <li>Light your face well; soft, front-facing light</li>
+          <li>Test audio — clear sound matters more than camera</li>
+          <li>Bring high, warm energy from the first second</li>
+        </ul>
+      </div>
+      <div class="col no">
+        <h5>Don't</h5>
+        <ul>
+          <li>Roll on camera in loungewear or straight out of bed</li>
+          <li>Sit backlit, in shadow, or against clutter</li>
+          <li>Use a tinny mic or a noisy room</li>
+          <li>Show up flat, distracted, or low-energy</li>
+          <li>Treat any on-camera moment as casual — it's a brand moment</li>
+        </ul>
+      </div>
+    </div>
+    <p>The standard is simple: <strong>look like someone members would pay to learn from.</strong> Because they do.</p>
+  </section>
+
+  <!-- 6 -->
+  <section id="s6" class="reveal">
+    <span class="sec-num">06 — How you nurture</span>
+    <h2>The relationship work</h2>
+    <p class="big">Nurture is the job. It's the daily, unglamorous work of making people feel seen, helping them grow, and pointing them to what's next. The moves:</p>
+    <h3>1 · Welcome everyone, personally</h3>
+    <p>Every new member gets greeted by name and introduced to the community. First touch decides whether they feel seen — make it human, never automated.</p>
+    <h3>2 · Make people feel seen</h3>
+    <p>Shout out wins. Reply to the quiet ones. Notice when someone's gone silent and reach out. If a member could vanish unnoticed, the system failed.</p>
+    <h3>3 · Spark connection between members</h3>
+    <p>Belonging isn't just member-to-manager — it's member-to-member. Introduce people with shared goals; create reasons for them to meet.</p>
+    <h3>4 · Run the transformation feed</h3>
+    <p>Prompt members to post their journey out loud, so the feed fills with proof and momentum. When one person shares a win, others get inspired, do more, and share back. It compounds.</p>
+    <div class="chips">
+      <span class="chip">How did week 1 go?</span>
+      <span class="chip">What are you working on?</span>
+      <span class="chip">Your biggest result this month?</span>
+      <span class="chip">What's your goal right now?</span>
+      <span class="chip">Share your transformation</span>
+    </div>
+    <h3>5 · Point them to the next thing</h3>
+    <p>Nurture isn't only emotional — it's directional. Part of the job is <strong>discovery</strong>: introduce members to the right lessons, quests, products and summits. If this week's conversation is about a topic, push them to the quest lesson that goes deeper. Mindvalley's content only transforms people if they find it — you point the way.</p>
+    <h3>6 · Highlight transformations to inspire</h3>
+    <p>Spotlight real member transformations — they're the most powerful thing in the room. If a Longevity member went from 101kg to running a Hyrox, tell that story so the next person sees what's possible and thinks "I could do that too." Make these spotlights a regular feature, not an accident.</p>
+    <div class="fm">
+      <div class="fmh">On FinerMinds</div>
+      <p>Welcome new members through <strong>chat</strong> and a <strong>feed</strong> post. Use <strong>"Members to Meet"</strong> — its smart recommendations by shared interests — to spark introductions, especially in Relationships &amp; Community. Lean on member <strong>profiles, interests and tagging</strong> to personalise outreach, and run cohort conversation in <strong>group chat</strong> and <strong>Level Chat</strong> tied to progression.</p>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section id="s7" class="reveal">
+    <span class="sec-num">07 — The operating rhythm</span>
+    <h2>The recurring cadence</h2>
+    <ol class="rhythm">
+      <li><small>On every join</small><b>Welcome &amp; introduce new members</b><p>Greet and onboard every new member. Warm and personal, every time.</p></li>
+      <li><small>Daily</small><b>Post the day's tip from the 90-day plan</b><p>The pathway's guided tip, with its share prompt — the content backbone that makes every day feel like progress. (See §9.)</p></li>
+      <li><small>Every 2 weeks</small><b>Run an engaging poll or survey</b><p>Drives engagement and doubles as your harvesting tool for wins, goals, and results.</p></li>
+      <li><small>Every 2 weeks — pending approval</small><b>Produce an author-led live call</b><p>A short, punchy 30-minute call on a set topic — the author hosts, you make it land. (See §8.)</p></li>
+      <li><small>Always on</small><b>Harvest testimonials &amp; transformations</b><p>Keep prompting members to share progress so the feed stays alive with proof.</p></li>
+      <li><small>Ongoing</small><b>Build in public</b><p>Show the behind-the-scenes — what we're building, what's coming, what we're bringing to the community next. People root for what they watch being made.</p></li>
+      <li><small>Ahead of the calendar</small><b>Nurture toward the sale</b><p>Warm members for what's coming — "the Manifesting Summit is in May, here are the authors we've signed, here's the link to join." Seed the launch well before it opens so the community sells it, not an email blast.</p></li>
+    </ol>
+    <div class="fm">
+      <div class="fmh">On FinerMinds</div>
+      <p>Schedule and run calls through <strong>Events</strong>. Post <strong>polls and prompts</strong> to the feed. Onboard waves of members with <strong>email and bulk CSV invitations</strong>, and watch <strong>invite status</strong> to see who's activated and who's stalled.</p>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section id="s8" class="reveal">
+    <span class="sec-num">08 — The live call</span>
+    <h2>The live call is the author's stage</h2>
+    <div class="fm" style="background:#fff;border-color:var(--gold);">
+      <div class="fmh" style="color:var(--gold);">To be confirmed — needs Vishen's approval</div>
+      <p>Vishen has reservations about adding calls, so this whole section is provisional until he signs off. Two open questions: whether we run live calls at all, and — if membership already includes recorded content plus community — whether the live-call experience belongs in <strong>Academy</strong> rather than membership.</p>
+    </div>
+    <p class="big">If we run them: live calls are hosted by people with real clout — Vishen or major authors — not the community manager. Author-led calls are what drive engagement; a marquee name is the draw. Your job isn't to host. It's to <strong>produce and amplify</strong>. The point of every call is to drive <strong>consumption, discovery and engagement</strong> — pulling members into the content.</p>
+    <h3>Keep them short and purposeful</h3>
+    <p>Run a call roughly <strong>every two weeks</strong>, and keep them <strong>short — 30 minutes, punchy</strong>, not a sprawling hour. We don't want to compete with Mastery; pile on too many long calls and members attend nothing. Every call has a <strong>topic set in advance</strong>, and it's one of three things: a discussion on a topic, a debrief of the week's homework and what people produced, or an introduction to a new author.</p>
+    <h3>Your job around the call</h3>
+    <p>Line the author up against the calendar, fill the room (warm members up beforehand and send the invites), facilitate live (run the chat, wrangle the Q&amp;A, hold the energy), and follow up after — post the replay and prompt members to share what they took from it. You make the call land; the author carries the stage.</p>
+    <h3>Be calendar-aware — seed before the sale</h3>
+    <p>Line up author calls ahead of what's selling. If a summit is coming, get its authors in front of members early so they arrive primed. <strong>Example:</strong> the Singapore Accelerator with Daniel Priestley — get him on a call early so members know him and the material, and when the accelerator opens, they already want in.</p>
+    <div class="fm">
+      <div class="fmh">On FinerMinds</div>
+      <p>Schedule the author's call through <strong>Events</strong>, fill it with <strong>personal broadcast</strong> invites, and post the replay to the <strong>document library</strong> so members who missed it still get the value.</p>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section id="s90" class="reveal">
+    <span class="sec-num">09 — The 90-day content plan</span>
+    <h2>A guided 90-day journey, one tip at a time</h2>
+    <p class="big">Every pathway runs on a <strong>90-day content plan</strong> — a steady stream of small, genuinely useful tips, not generic posts. From the day a member joins, they should feel they're on a guided journey, getting something each day that makes them a little better.</p>
+    <p>Join Exponential Founders and you get a daily tip that makes you a sharper entrepreneur. Join Longevity and you get a daily move toward more energy and a longer life. The pathway stops being a place you visit and becomes a journey you're walking.</p>
+
+    <h3>Where the tips come from</h3>
+    <p><strong>Gareth builds the 90-day journey</strong> for each pathway, generated with AI from the <strong>full transcript of each program</strong> — drawn straight from the authors' own teaching, so every tip is specific and useful, never filler. One program becomes ninety days of community fuel. Your job is simple: post it one tip at a time, on a steady cadence.</p>
+
+    <h3>Built for engagement, not broadcast</h3>
+    <p>A tip on its own is just a post. Every tip carries a <strong>specific ask</strong> — do this, then share it — exactly like the manifesting posts that asked members to share a photo of their journal page. The goal isn't to inform; it's to get members acting and posting, so each tip becomes a thread full of proof.</p>
+    <div class="grid">
+      <div class="card"><span class="ic">△</span><h4>Exponential Founders · Day 12</h4><span>"Before you build it, sell it. Pre-sell your offer to 10 people and let their money validate the idea."<br><br><strong>→ Drop the one offer you're pre-selling this week.</strong></span></div>
+      <div class="card"><span class="ic">◇</span><h4>Mindset &amp; Self-Mastery · Day 5</h4><span>"Your morning sets your frequency. Tonight, write tomorrow as if it already happened."<br><br><strong>→ Share a photo of your journal page.</strong></span></div>
+    </div>
+
+    <h3>How you run it</h3>
+    <p>The 90-day plan is your <strong>content backbone</strong> — no blank page, ever. You post the daily tip, then layer your polls and the weekly live call on top, and use each tip's prompt to keep the feed alive. The plan carries the rhythm; you bring the human touch.</p>
+
+    <div class="fm">
+      <div class="fmh">On FinerMinds</div>
+      <p>The AI draws its tips from the program transcripts held in the <strong>document library</strong>. Post each day's tip to the <strong>feed</strong>, <strong>tag</strong> it to the pathway, and let the engagement prompt drive the comments — so the day's tip becomes the day's thread.</p>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section id="s100" class="reveal">
+    <span class="sec-num">10 — The tech layer: build your AI</span>
+    <h2>Leverage AI, build your own dashboard</h2>
+    <p class="big">Gareth's 90-day journey is the baseline — but it's only 90 days, and it's the same for everyone. The real leverage is the AI you build for yourself: a dashboard wired into the <strong>brain of every program transcript</strong> and your <strong>library of member testimonials</strong>, that tells you what to say, what to ask, and what to promote.</p>
+    <h3>What your AI does for you</h3>
+    <p>It hands you content to post, questions to raise, and the lessons worth promoting this week — drawn from the transcripts and the real results members are reporting. You stop staring at a blank page and start working from a feed of ideas tuned to your community and the calendar.</p>
+    <h3>How it works in practice</h3>
+    <p>You ask it the way you'd ask a strategist. <em class="it">"The Manifesting Summit is two months out — what should I be doing now?"</em> It answers: start introducing the speakers, drop value bombs from their work, get people doing the manifesting quest, run a "who wants to do this quest with me this week?" challenge. The ideas come from the AI; you bring the human energy to them. Every community manager should be building their own.</p>
+    <div class="fm">
+      <div class="fmh">On FinerMinds</div>
+      <p>Point your AI at the program transcripts and replays in the <strong>document library</strong>, the <strong>testimonials</strong> you've collected, and the <strong>analytics</strong> on what's landing — then let it surface what to post, what to promote, and when, against the launch calendar.</p>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section id="s9" class="reveal">
+    <span class="sec-num">11 — The FinerMinds toolkit</span>
+    <h2>Every feature, mapped to the job</h2>
+    <p>The platform gives you everything you need to run all of the above. Use it deliberately — each feature has a job.</p>
+    <table class="fmtbl">
+      <thead><tr><th>Feature</th><th>What you use it for</th></tr></thead>
+      <tbody>
+        <tr><td>Branded community spaces</td><td>The home for each community. You're Admin.</td></tr>
+        <tr><td>Sub-groups</td><td>Cohorts, challenges and pods within a community.</td></tr>
+        <tr><td>Activity feeds</td><td>The transformation wall — wins, prompts, polls, momentum.</td></tr>
+        <tr><td>1:1, group &amp; Level Chat</td><td>Personal touches, cohort conversation, and chat tied to progression levels.</td></tr>
+        <tr><td>Events</td><td>Schedule and promote author-led live calls.</td></tr>
+        <tr><td>Member profiles &amp; "Members to Meet"</td><td>Personalise welcomes; spark member-to-member connection by shared interest.</td></tr>
+        <tr><td>Email + bulk CSV invitations</td><td>Onboard members in waves; track activation via invite status.</td></tr>
+        <tr><td>Document library + AI search</td><td>Curriculum, worksheets, replays — findable and tagged by pathway.</td></tr>
+        <tr><td>Stats &amp; analytics</td><td>Your KPI dashboard — size, engagement, activation, retention signals.</td></tr>
+        <tr><td>Moderation &amp; member management</td><td>Keep the space safe, on-brand, and high-trust.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 10 -->
+  <section id="s10" class="reveal">
+    <span class="sec-num">12 — What's expected of you</span>
+    <h2>The standards you're held to</h2>
+    <p>Autonomy comes with a quality bar. These are non-negotiable:</p>
+    <div class="dd">
+      <div class="col yes">
+        <h5>The standard</h5>
+        <ul>
+          <li>Daily presence in the feed — react, reply, acknowledge</li>
+          <li>Every new member welcomed personally</li>
+          <li>A poll/survey at least every two weeks</li>
+          <li>An author-led live call roughly every two weeks, if approved — produced and filled by you</li>
+          <li>Testimonials harvested continuously</li>
+          <li>A clean, safe, on-brand space — moderated actively</li>
+        </ul>
+      </div>
+      <div class="col no">
+        <h5>Falling short</h5>
+        <ul>
+          <li>Silent feeds and unanswered members</li>
+          <li>Generic, copy-paste welcomes</li>
+          <li>Author calls booked last-minute, or a half-empty room</li>
+          <li>Reacting to the launch calendar instead of seeding ahead</li>
+          <li>Letting the space go quiet between events</li>
+          <li>Off-brand presentation on camera</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section id="s11" class="reveal">
+    <span class="sec-num">13 — The KPIs</span>
+    <h2>How you're measured &amp; rewarded</h2>
+    <p>You run autonomously, and you're held to the numbers. These define the role and the basis you're rewarded against.</p>
+
+    <div class="kpi-group"><div class="gh">Growth &amp; size</div>
+      <div class="kpi-list">
+        <div class="kpi"><b>Community size</b><span>Total members in each community</span></div>
+        <div class="kpi"><b>Activation rate</b><span>% of members who take a first action / engage after joining</span></div>
+      </div></div>
+
+    <div class="kpi-group"><div class="gh">Engagement</div>
+      <div class="kpi-list">
+        <div class="kpi"><b>Engagement frequency</b><span>How often members post, comment, return — weekly active</span></div>
+        <div class="kpi"><b>Live call attendance</b><span>Turnout you drive to the author-led calls</span></div>
+      </div></div>
+
+    <div class="kpi-group"><div class="gh">Proof &amp; transformation</div>
+      <div class="kpi-list">
+        <div class="kpi"><b>Testimonials collected</b><span>Volume of results &amp; transformation stories captured</span></div>
+        <div class="kpi"><b>Quest progression driven</b><span>Members pulled into completing more quests</span></div>
+      </div>
+      <div class="cohort"><b>Track testimonials by member tenure.</b> Don't just count totals — count how many you collect from members in their 1st, 2nd, 3rd, 4th and 5th month. Early-tenure proof is the strongest signal that the community is creating transformation fast.
+        <div class="months"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+      </div></div>
+
+    <div class="kpi-group"><div class="gh">Retention &amp; revenue</div>
+      <div class="kpi-list">
+        <div class="kpi"><b>Retention uplift</b><span>Retention of community-engaged members vs. non-engaged</span></div>
+        <div class="kpi"><b>Downstream conversion</b><span>Members who go on to buy summits / accelerators</span></div>
+      </div></div>
+
+    <div class="fm">
+      <div class="fmh">On FinerMinds</div>
+      <p>The built-in <strong>community stats and analytics</strong> are your dashboard for size, activation and engagement. Pair them with <strong>invite-status tracking</strong> for activation, and pull retention/revenue numbers through the <strong>API integration</strong> into your reporting.</p>
+    </div>
+  </section>
+
+  <!-- 12 -->
+  <section id="s12" class="reveal">
+    <span class="sec-num">14 — What good looks like</span>
+    <h2>Operating principles</h2>
+    <ul class="prin">
+      <li><strong>Run it like it's yours.</strong> Own your agenda, curriculum and calendar. Don't wait to be directed.</li>
+      <li><strong>Always be laddering.</strong> Every interaction nudges toward the next quest, the next call, or the next product.</li>
+      <li><strong>Make the invisible visible.</strong> Surface members' growth so they can feel themselves changing.</li>
+      <li><strong>Seed ahead of the calendar.</strong> Warm members for what's coming — never react after it's launched.</li>
+      <li><strong>Every member feels seen.</strong> If someone could vanish without being noticed, you missed the job.</li>
+      <li><strong>Hold the premium bar.</strong> How you show up — in voice, on camera, in the feed — is the value members feel.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="rule"></div>
+    The Mindvalley Community Playbook · Mindvalley × FinerMinds · The operator's guide to running community · Internal
+  </footer>
+
+</div>
+</body>
+</html>

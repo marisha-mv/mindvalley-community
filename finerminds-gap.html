@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinerMinds Community — Features to Build</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,0,600;9..144,0,700;9..144,1,400;9..144,1,500&family=Archivo:wght@400;500;600;700&family=Archivo+Expanded:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f2ea; --paper-2:#efe9dd; --ink:#1c1b18; --ink-soft:#4a463d;
+    --line:#d8cfbe; --accent:#0e6b62; --accent-soft:#0e6b6212; --accent-line:#0e6b6240;
+    --gold:#b07a2c; --rust:#a4452e;
+    --display:'Fraunces',Georgia,serif; --body:'Archivo',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;padding:0 24px 90px;}
+  .wrap{max-width:900px;margin:0 auto;}
+  header.mast{padding:72px 0 34px;border-bottom:2px solid var(--ink);}
+  .kicker{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:24px;}
+  h1{font-family:var(--display);font-weight:600;font-size:clamp(2.5rem,6vw,4.4rem);line-height:.97;letter-spacing:-.025em;margin-bottom:20px;}
+  h1 em{font-style:italic;color:var(--accent);}
+  .lede{font-size:clamp(1.05rem,2vw,1.2rem);color:var(--ink-soft);max-width:64ch;}
+  .meta{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px;}
+  .tag{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding:6px 12px;border:1px solid var(--line);border-radius:100px;color:var(--ink-soft);}
+  .topnav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line);}
+  .topnav .sep{color:var(--gold);font-family:var(--display);font-style:italic;font-size:.95rem;margin-right:6px;}
+  .topnav .doclink{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:7px 14px;border-radius:100px;border:1px solid var(--line);color:var(--ink-soft);text-decoration:none;transition:border-color .15s,color .15s;}
+  .topnav a.doclink:hover{border-color:var(--accent);color:var(--accent);}
+  .topnav .doclink.active{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+  section{padding:50px 0;border-bottom:1px solid var(--line);}
+  .sec-num{font-family:var(--display);font-style:italic;color:var(--gold);font-size:1rem;display:block;margin-bottom:8px;}
+  h2{font-family:var(--display);font-weight:600;font-size:clamp(1.7rem,3.6vw,2.4rem);letter-spacing:-.015em;line-height:1.05;margin-bottom:14px;}
+  p{margin-bottom:14px;max-width:70ch;color:var(--ink-soft);}
+  p strong{color:var(--ink);font-weight:600;}
+  .big{font-size:1.1rem;color:var(--ink);}
+  .pull{font-family:var(--display);font-size:clamp(1.2rem,2.6vw,1.6rem);line-height:1.3;color:var(--ink);font-weight:500;border-left:3px solid var(--accent);padding:4px 0 4px 22px;margin:22px 0;max-width:56ch;}
+  .inv{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px;}
+  .invcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;}
+  .invcard h4{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:12px;}
+  .invcard ul{list-style:none;}
+  .invcard li{font-size:.9rem;color:var(--ink-soft);padding:5px 0 5px 22px;position:relative;}
+  .invcard li::before{content:"\2713";position:absolute;left:0;top:5px;color:var(--accent);font-weight:700;font-size:.85rem;}
+  .legend{display:flex;flex-wrap:wrap;gap:24px;margin-top:18px;padding:16px 20px;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;font-size:.85rem;}
+  .legend .grp b{display:block;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin-bottom:8px;}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:100px;margin-right:6px;}
+  .imp-1{background:var(--accent);color:#fff;} .imp-2{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-line);}
+  .eff{display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+  .eff::before{content:"";width:9px;height:9px;border-radius:50%;}
+  .eff-l::before{background:var(--accent);} .eff-m::before{background:var(--gold);} .eff-h::before{background:var(--rust);}
+  .eff-l{color:var(--accent);} .eff-m{color:var(--gold);} .eff-h{color:var(--rust);}
+  .first-banner{margin-top:24px;display:flex;align-items:center;gap:12px;background:var(--gold);color:#fff;border-radius:10px 10px 0 0;padding:10px 18px;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;}
+  .first-wrap{border:2px solid var(--gold);border-top:none;border-radius:0 0 10px 10px;padding:0 22px 6px;margin-bottom:14px;background:#fffdf7;}
+  .first-wrap .rank:first-of-type{border-top:none;}
+  .grouplbl{font-family:var(--display);font-style:italic;font-size:1.1rem;color:var(--gold);margin:28px 0 2px;}
+  .rank{display:flex;gap:22px;padding:24px 0;border-top:1px solid var(--line);}
+  .group .rank:first-of-type{border-top:none;}
+  .rnum{font-family:'Archivo Expanded',var(--display);font-weight:700;font-size:2.4rem;line-height:1;color:var(--gold);min-width:58px;letter-spacing:-.04em;}
+  .rbody{flex:1;}
+  .rhead{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:8px;}
+  .rhead h3{font-family:var(--display);font-weight:600;font-size:1.3rem;color:var(--ink);letter-spacing:-.01em;width:100%;}
+  .rbody p{margin:0;max-width:68ch;font-size:.96rem;}
+  .principle{padding:22px 0;border-top:1px solid var(--line);}
+  .group2 .principle:first-of-type{border-top:none;}
+  .principle h3{font-family:var(--display);font-weight:600;font-size:1.22rem;color:var(--ink);letter-spacing:-.01em;margin-bottom:8px;}
+  .principle p{font-size:.95rem;margin-bottom:10px;max-width:70ch;color:var(--ink-soft);}
+  .principle p em{font-style:italic;color:var(--ink);}
+  .deliver{font-size:.85rem;color:var(--ink);background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:8px;padding:9px 13px;margin-bottom:8px;}
+  .deliver b{color:var(--accent);text-transform:uppercase;letter-spacing:.12em;font-size:.64rem;display:block;margin-bottom:3px;}
+  .watch{font-size:.85rem;color:var(--rust);font-style:italic;}
+  .gapflag{background:#fffdf7;border:2px solid var(--gold);border-radius:12px;padding:14px 18px;margin-top:4px;}
+  .gapflag b{color:var(--gold);text-transform:uppercase;letter-spacing:.14em;font-size:.66rem;display:block;margin-bottom:6px;}
+  .gapflag span{font-size:.9rem;color:var(--ink);}
+  footer{padding:44px 0 0;color:var(--ink-soft);font-size:.85rem;}
+  footer .rule{height:2px;background:var(--ink);margin-bottom:18px;}
+  .reveal{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards;}
+  @keyframes rise{to{opacity:1;transform:none;}}
+  @media(max-width:680px){.inv{grid-template-columns:1fr;}body{padding:0 18px 60px;}.rank{gap:14px;}.rnum{font-size:1.9rem;min-width:42px;}.first-wrap{padding:0 14px 6px;}}
+  @media print{body{background:#fff;}.reveal{animation:none;opacity:1;transform:none;}section,.rank,.invcard{break-inside:avoid;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="topnav reveal">
+    <span class="sep">Mindvalley Community</span>
+    <a class="doclink" href="mindvalley-community-playbook.html">Community Playbook</a>
+    <span class="doclink active">Feature Roadmap</span>
+  </nav>
+
+  <header class="mast reveal">
+    <div class="kicker">FinerMinds × Mindvalley · Community Features · For the Tech Team</div>
+    <h1>What's live, and<br>what we're <em>adding.</em></h1>
+    <p class="lede">The community is Mindvalley's retention engine — people stay when they feel seen and feel themselves growing. Here's what FinerMinds has today, what to build, and the principles that make those features actually retain people.</p>
+    <div class="meta"><span class="tag">Current Features</span><span class="tag">Features to Build</span><span class="tag">Design Principles</span></div>
+  </header>
+
+  <!-- PRINCIPLES -->
+  <section class="reveal">
+    <span class="sec-num">01 — The principles that make it work</span>
+    <h2>What turns features into retention</h2>
+    <p>Features alone don't retain people — how they're wired together does. These are the lessons from how the best engagement platforms (Strava, Duolingo) actually keep people coming back, each tied to the features below.</p>
+    <div class="group2">
+
+      <div class="principle">
+        <h3>1 · The feed is member activity, not broadcast</h3>
+        <p>The main content has to be what members <em>do</em> — their wins, progress and challenge updates — not brand posts. The daily tip is the nudge; the members are the feed. If the feed is mostly us talking, it's a newsletter in a community costume.</p>
+        <div class="deliver"><b>Delivered by</b>Likes, comments &amp; sharing wins (04) · Progress Cards (05) · Member-started challenges (02) · Testimonials (14)</div>
+        <div class="watch">Watch-out: don't let brand and AI posts dominate the feed.</div>
+      </div>
+
+      <div class="principle">
+        <h3>2 · The social graph is the retention spine</h3>
+        <p>Retention tracks how <em>connected</em> a member is, not how good the content is. The week-one job is getting each new member following a handful of people and into a pod — that's what makes leaving cost something.</p>
+        <div class="deliver"><b>Delivered by</b>Buddy &amp; friends (09) · Niche pods (01) · Velvet-rope invites (10) · "Members to Meet" (live today)</div>
+        <div class="watch">Watch-out: Buddy &amp; friends sits at #9 — for retention it's closer to a spine than a nice-to-have.</div>
+      </div>
+
+      <div class="principle">
+        <h3>3 · Engineer the week-one "aha"</h3>
+        <p>The first sessions decide retention. Define one week-one behavioural milestone — <em>posts a win, gets a few reactions, joins a pod within 7 days</em> — and make onboarding drive it. "Feel seen" is a feeling; this is a number you can move.</p>
+        <div class="gapflag"><b>The one gap</b><span>There's no activation / first-week onboarding flow in the list yet — the single feature I'd add. It routes a new member to their pod, their first win, and their first few connections inside the first session.</span></div>
+      </div>
+
+      <div class="principle">
+        <h3>4 · The product does the work, not the manager</h3>
+        <p>Engagement can't hinge on a heroic community manager posting all day. The system, the AI and the members should carry it, so the manager is leverage, not labour. Test: if the community goes quiet when the manager takes a week off, the system isn't doing enough.</p>
+        <div class="deliver"><b>Delivered by</b>AI engagement &amp; pings (03) · Spark + identity levels (07, 08) · Demand map (13)</div>
+      </div>
+
+      <div class="principle">
+        <h3>5 · Protect the trust — cap the selling</h3>
+        <p>The same trust that makes someone share a transformation is what you spend when you pitch them. Ring-fence the ratio of promotional beats to purely-for-them beats, or the feed goes quiet.</p>
+        <div class="deliver"><b>Governs</b>Personal broadcast (11) · Affiliate marketplace (12) — use sparingly in the feed</div>
+      </div>
+
+      <div class="principle">
+        <h3>6 · Velvet rope is acquisition, not retention</h3>
+        <p>Invites get a spike; a sticky loop keeps people. Clubhouse is the warning, not the model — explosive invite growth, then collapse, because the core loop wasn't sticky. Pair the invite engine with the features that actually retain.</p>
+        <div class="deliver"><b>Delivered by</b>Velvet-rope invites (10) for growth — Niche pods (01), Challenges (02) &amp; Identity levels (08) for stickiness</div>
+      </div>
+
+      <div class="principle">
+        <h3>7 · Replace the live-call heartbeat with cohort challenges</h3>
+        <p>If live calls are cut or uncertain, time-boxed cohort challenges become the synchronous pulse — everyone starting the same thing the same week. It's the closest thing to a shared "we're all in this right now" moment.</p>
+        <div class="deliver"><b>Delivered by</b>Member-started challenges (02), run on a seasonal / cohort cadence</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CURRENT -->
+  <section class="reveal">
+    <span class="sec-num">02 — Current features</span>
+    <h2>What's live on FinerMinds today</h2>
+    <p>The platform foundation — spaces, feeds, chat, events, invitations, a content library, and admin tools.</p>
+    <div class="inv">
+      <div class="invcard"><h4>Communities &amp; Networks</h4><ul><li>Branded community spaces</li><li>Sub-groups — Public / Private / Secret</li><li>One-level nesting · Admin / Member roles</li></ul></div>
+      <div class="invcard"><h4>People &amp; Discovery</h4><ul><li>Member profiles — name, photo, bio, interests</li><li>Browse and search members</li><li>"Members to Meet" recommendations</li></ul></div>
+      <div class="invcard"><h4>Communication</h4><ul><li>Activity feeds per network and group</li><li>1:1 and group chat · "Level Chat"</li><li>Events management</li></ul></div>
+      <div class="invcard"><h4>Invitations &amp; Onboarding</h4><ul><li>Email invitations (network + group)</li><li>Bulk invitations via CSV</li><li>Invite-status tracking</li></ul></div>
+      <div class="invcard"><h4>Content &amp; Resources</h4><ul><li>Document / file library with AI search</li><li>Tagging for content and interests</li></ul></div>
+      <div class="invcard"><h4>Admin Tools</h4><ul><li>Member management · moderation · stats</li><li>Super-admin · API keys · analytics</li></ul></div>
+    </div>
+  </section>
+
+  <!-- TO BUILD -->
+  <section class="reveal">
+    <span class="sec-num">03 — Features to build</span>
+    <h2>What to build</h2>
+    <p>The first four are the <strong>build-first set</strong>. The rest follow, grouped to flow. Each carries an impact tier and an indicative build effort for the tech team to validate.</p>
+    <div class="legend">
+      <div class="grp"><b>Impact</b><span class="pill imp-1">Highest</span><span class="pill imp-2">High</span></div>
+      <div class="grp"><b>Effort (indicative)</b><span class="eff eff-l">Light</span>&nbsp;&nbsp;<span class="eff eff-m">Medium</span>&nbsp;&nbsp;<span class="eff eff-h">Heavy</span></div>
+    </div>
+
+    <div class="first-banner">★ Build first</div>
+    <div class="first-wrap group">
+      <div class="rank"><div class="rnum">01</div><div class="rbody">
+        <div class="rhead"><h3>Niche pods — member-created, member-led</h3><span class="pill imp-1">Highest</span><span class="eff eff-m">Medium</span></div>
+        <p>Members can create and lead their own pods around a specific niche — an ecom pod, a runners pod — each its own thread. Includes small accountability pods where a handful of members keep each other going.</p>
+      </div></div>
+      <div class="rank"><div class="rnum">02</div><div class="rbody">
+        <div class="rhead"><h3>Member-started challenges</h3><span class="pill imp-1">Highest</span><span class="eff eff-m">Medium</span></div>
+        <p>Any member can start a challenge and bring others in to do it with them — quit smoking, a running streak — rallying their own people around a shared goal.</p>
+      </div></div>
+      <div class="rank"><div class="rnum">03</div><div class="rbody">
+        <div class="rhead"><h3>AI engagement, guidance &amp; accountability</h3><span class="pill imp-1">Highest</span><span class="eff eff-h">Heavy</span></div>
+        <p>The AI engages with members directly — responds to them, and pings anyone who hasn't come back in a week to pull them in, covering the gaps while the community manager runs the calls. Pings are personalized: a post to read, a pod or challenge to join, a workshop to attend. It also guides and coaches each member using the authors' work, and runs a daily accountability and feedback loop — checking in on the practice, what they did and what happened.</p>
+      </div></div>
+      <div class="rank"><div class="rnum">04</div><div class="rbody">
+        <div class="rhead"><h3>Engagement — likes, comments &amp; sharing wins</h3><span class="pill imp-1">Highest</span><span class="eff eff-l">Light</span></div>
+        <p>Members like, comment on, and share each other's progress. The dopamine of being seen is what brings people back to post again. Members can share their wins on the app, or publicly out to their other social.</p>
+      </div></div>
+    </div>
+
+    <div class="grouplbl">Then</div>
+    <div class="group">
+      <div class="rank"><div class="rnum">05</div><div class="rbody">
+        <div class="rhead"><h3>Progress Cards — the growth loop</h3><span class="pill imp-2">High</span><span class="eff eff-m">Medium</span></div>
+        <p>When a member hits a milestone — finishes a quest, completes a challenge, hits a streak, or marks who they're becoming — the app auto-generates a beautiful, branded card from their real progress ("Day 30 of my 5am practice"), built to look right on an Instagram or Facebook story. They share it because it signals who they're becoming; followers see a branded card with a join link, and some come in. A challenge card links straight into the live challenge, so a friend joins <em>inside</em> the thing, with them — not just inspired. When someone joins through a card, the sharer earns Spark, and we can see which member drove the signup.</p>
+      </div></div>
+      <div class="rank"><div class="rnum">06</div><div class="rbody">
+        <div class="rhead"><h3>Monthly transformation recap</h3><span class="pill imp-2">High</span><span class="eff eff-m">Medium</span></div>
+        <p>A personalized monthly recap of each member's progress — practices done, wins, who they're becoming — in the style of Spotify Wrapped, and built to share on social.</p>
+      </div></div>
+      <div class="rank"><div class="rnum">07</div><div class="rbody">
+        <div class="rhead"><h3>Spark points</h3><span class="pill imp-2">High</span><span class="eff eff-m">Medium</span></div>
+        <p>Members earn points for consumption, engagement and sharing, and redeem them later.</p>
+      </div></div>
+      <div class="rank"><div class="rnum">08</div><div class="rbody">
+        <div class="rhead"><h3>Identity levels — status tiers</h3><span class="pill imp-2">High</span><span class="eff eff-m">Medium</span></div>
+        <p>Status tiers — Bronze, Silver, Gold — that members climb as they earn Spark points, the way loyalty brands work. Each tier unlocks more features and perks (Gold might get event-pass discounts or free passes), so members have a status to chase and a reason to stay active.</p>
+      </div></div>
+      <div class="rank"><div class="rnum">09</div><div class="rbody">
+        <div class="rhead"><h3>Buddy &amp; friends</h3><span class="pill imp-2">High</span><span class="eff eff-m">Medium</span></div>
+        <p>Members can find which of their friends are already on the app and add them, see what their friends are doing — the challenges they're in, what they're attending — and invite or share with friends to join what they're doing or attending.</p>
+      </div></div>
+      <div class="rank"><div class="rnum">10</div><div class="rbody">
+        <div class="rhead"><h3>Velvet-rope entry &amp; the invite engine</h3><span class="pill imp-2">High</span><span class="eff eff-m">Medium</span></div>
+        <p>The community is free, but you can't just walk in — you apply, or you're invited. Borrowing Clubhouse's growth engine: every person who joins gets 3 invites to bring in or recommend three people. Anyone they invite who isn't already a member lands in the free founder community. Scarcity and word of mouth scale it; capped invites plus the application keep the bar high, so it stays a room worth being in — the way Raya and Clubhouse grew.</p>
+      </div></div>
+      <div class="rank"><div class="rnum">11</div><div class="rbody">
+        <div class="rhead"><h3>Personal broadcast</h3><span class="pill imp-2">High</span><span class="eff eff-l">Light–Med</span></div>
+        <p>The host sends one message to many, but each lands looking like a private 1:1 DM — ideal for inviting members to classes and summits without it feeling like a blast.</p>
+      </div></div>
+      <div class="rank"><div class="rnum">12</div><div class="rbody">
+        <div class="rhead"><h3>Affiliate marketplace</h3><span class="pill imp-2">High</span><span class="eff eff-h">Heavy</span></div>
+        <p>A marketplace where members and experts can list their own products and services to the community. Mindvalley takes a 30% cut of every sale.</p>
+      </div></div>
+      <div class="rank"><div class="rnum">13</div><div class="rbody">
+        <div class="rhead"><h3>Demand map</h3><span class="pill imp-2">High</span><span class="eff eff-m">Medium</span></div>
+        <p>A living map of the keywords, questions and topics members raise — and it keeps growing — so we always know what people are interested in and what challenges they're facing.</p>
+      </div></div>
+      <div class="rank"><div class="rnum">14</div><div class="rbody">
+        <div class="rhead"><h3>Testimonials — member-added &amp; host-requested</h3><span class="pill imp-2">High</span><span class="eff eff-m">Medium</span></div>
+        <p>Members can add testimonials directly from the community, and the host can request a testimonial from a member or a whole cohort. Tracked by membership tenure (month 1–5).</p>
+      </div></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="rule"></div>
+    FinerMinds Community — Current features &amp; features to build · For the tech team · Internal
+  </footer>
+
+</div>
+</body>
+</html>
