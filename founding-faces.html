@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Founding Faces — The AI Guild</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,0,600;9..144,0,700;9..144,1,400;9..144,1,500;9..144,1,600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f3ec; --paper-2:#efe9dd; --card:#ffffff; --ink:#16150f; --ink-2:#43403a;
+    --soft:#6a665d; --line:#e0d8c8; --line-2:#cdc3af;
+    --accent:#0e6b62; --gold:#a9772a; --rust:#a4452e; --ink-deep:#11140f;
+    --display:'Fraunces',Georgia,serif; --body:'Archivo',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  ::selection{background:var(--accent);color:#fff;}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 30px;}
+
+  nav.top{border-bottom:1px solid var(--line);background:rgba(247,243,236,.9);backdrop-filter:blur(12px);position:sticky;top:0;z-index:40;}
+  nav.top .inner{display:flex;align-items:center;justify-content:space-between;padding:17px 30px;max-width:1000px;margin:0 auto;}
+  .logo{font-family:var(--display);font-weight:600;font-size:1.12rem;}
+  .logo em{font-style:italic;color:var(--gold);}
+  .back{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--soft);text-decoration:none;transition:color .2s;}
+  .back:hover{color:var(--accent);}
+
+  h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;line-height:1.05;}
+  h1 em{font-style:italic;color:var(--gold);font-weight:500;}
+  .eyebrow{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:700;}
+
+  header.head{padding:56px 0 26px;border-bottom:2px solid var(--ink);}
+  header.head h1{font-size:clamp(2.4rem,5.5vw,3.8rem);margin:16px 0 16px;}
+  header.head p{color:var(--ink-2);font-size:1.05rem;max-width:60ch;}
+
+  .warn{background:#fffdf7;border:1px solid var(--gold);border-radius:12px;padding:14px 18px;margin:24px 0;font-size:.9rem;color:var(--ink);}
+  .warn b{color:var(--gold);text-transform:uppercase;letter-spacing:.12em;font-size:.66rem;display:block;margin-bottom:5px;}
+
+  section{padding:40px 0;border-bottom:1px solid var(--line);}
+  .lbl{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px;}
+  h2{font-size:clamp(1.5rem,3.2vw,2.1rem);margin-bottom:6px;}
+  .sub{color:var(--soft);font-size:.95rem;margin-bottom:18px;}
+
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.9rem;}
+  th{text-align:left;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700;padding:9px 10px;border-bottom:2px solid var(--line);}
+  td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2);}
+  td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;}
+  td a{color:var(--accent);text-decoration:none;}
+  td a:hover{text-decoration:underline;}
+  .host{display:inline-block;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--accent);border:1px solid var(--accent);border-radius:100px;padding:2px 8px;}
+  .star{color:var(--gold);}
+  .warnflag{color:var(--rust);font-weight:700;}
+
+  .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+  .pill{background:var(--card);border:1px solid var(--line);border-radius:100px;padding:8px 14px;font-size:.86rem;color:var(--ink);}
+  .pill b{color:var(--accent);}
+
+  .note{font-size:.86rem;color:var(--ink-2);background:var(--paper-2);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-top:14px;}
+  footer{padding:36px 0;color:var(--soft);font-size:.78rem;}
+
+  @media(max-width:680px){table{font-size:.82rem;}td,th{padding:8px 6px;}}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="inner">
+    <div class="logo">The AI <em>Guild</em></div>
+    <a class="back" href="index.html">← Hub</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="head">
+    <div class="eyebrow">Internal · Recruitment Target List</div>
+    <h1>50 Founding <em>Faces.</em></h1>
+    <p>Up-and-coming AI micro-influencers — each under 50k followers on their strongest platform — to recruit as founding faces, affiliates and Guild Master candidates. This is an internal target list; names go on the public page only once they've agreed.</p>
+    <div class="warn"><b>Read first</b> All follower counts are <strong>estimates</strong> (live profile reads were blocked). Verify each profile (~20-min pass) before outreach. <span class="warnflag">⚠️</span> = low-confidence count. "HOST" = could host/run the room. Band rule = under 50k on <em>strongest</em> platform.</div>
+  </header>
+
+  <!-- PRIORITY -->
+  <section>
+    <div class="lbl">Start here</div>
+    <h2>Priority outreach</h2>
+    <div class="sub">Warmest "yes" — they already run paid rooms, so the leap to a Guild is smallest.</div>
+    <div class="pills">
+      <span class="pill"><b>Owain Lewis</b> · runs a $69/mo AI community</span>
+      <span class="pill"><b>Jack Friks</b> · solo app maker, ~40k X</span>
+      <span class="pill"><b>Jordan Wilson</b> · daily live AI host</span>
+      <span class="pill"><b>Kevon Cheung</b> · teaches the cohort format</span>
+      <span class="pill"><b>Maya Akim</b> · charismatic, in-band</span>
+      <span class="pill"><b>AI Jason</b> · runs AI Builder Club (bimodal)</span>
+      <span class="pill"><b>Alex Finn</b> · paid Vibe Coding Academy (bimodal)</span>
+    </div>
+    <div class="note"><strong>Best premium-optics for the $5k positioning:</strong> Nicole Leffer · Jordan Wilson · Liza Adams · Heather Murray · Tim Cortinovis · Victor Dibia.</div>
+  </section>
+
+  <!-- YOUTUBE -->
+  <section>
+    <div class="lbl">The 50 · 1–15</div>
+    <h2>YouTube / video-first</h2>
+    <table>
+      <thead><tr><th>Name</th><th>Handle</th><th>Est. (conf.)</th><th>Niche</th><th>Host?</th></tr></thead>
+      <tbody>
+        <tr><td>1 · Maya Akim <span class="star">★</span></td><td><a href="https://www.youtube.com/@maya-akim">@maya-akim</a></td><td>~43k (high)</td><td>Multi-agent / CrewAI</td><td><span class="host">Host</span></td></tr>
+        <tr><td>2 · Venelin Valkov</td><td><a href="https://www.youtube.com/@venelin_valkov">@venelin_valkov</a></td><td>~34k (high)</td><td>Agents: CrewAI/LangGraph/MCP</td><td><span class="host">Host</span></td></tr>
+        <tr><td>3 · Leonardo Grigorio</td><td><a href="https://www.youtube.com/@leonardogrig">@leonardogrig</a></td><td>~28k (high)</td><td>n8n content systems</td><td><span class="host">Host</span></td></tr>
+        <tr><td>4 · Lucas Soares</td><td>Automata Learning Lab</td><td>~22k (high)</td><td>LLM agents, eval, RAG</td><td><span class="host">Host</span></td></tr>
+        <tr><td>5 · Seth Kramer</td><td><a href="https://www.youtube.com/@nocodemba">@nocodemba</a></td><td>~22–34k (med-high)</td><td>No-code AI apps</td><td><span class="host">Host</span></td></tr>
+        <tr><td>6 · Ras Mic</td><td><a href="https://www.youtube.com/@Rasmic">@Rasmic</a></td><td>~32k (high)</td><td>Cursor / Claude Code</td><td><span class="host">Host</span></td></tr>
+        <tr><td>7 · Matt Palmer</td><td><a href="https://x.com/mattppal">@mattppal</a></td><td>~33k (high)</td><td>Vibe coding (ex-Replit)</td><td><span class="host">Host</span></td></tr>
+        <tr><td>8 · Jannis Moore</td><td><a href="https://www.youtube.com/@jannismoore">@jannismoore</a></td><td>~26k (med-high)</td><td>n8n automation, voice agents</td><td><span class="host">Host</span></td></tr>
+        <tr><td>9 · Ryan Doser</td><td><a href="https://www.youtube.com/@RyanDoserAI">@RyanDoserAI</a></td><td>~30–36k (high)</td><td>AI for marketers</td><td><span class="host">Host</span></td></tr>
+        <tr><td>10 · Andy Lo</td><td><a href="https://www.youtube.com/@andylokcl">@andylokcl</a></td><td>~34k Skool (high)</td><td>Faceless video automation</td><td><span class="host">Host</span></td></tr>
+        <tr><td>11 · Patrick Ellis</td><td><a href="https://www.youtube.com/@PatrickOakleyEllis">@PatrickOakleyEllis</a></td><td>~10–40k <span class="warnflag">⚠️</span></td><td>Claude Code workflows</td><td><span class="host">Host</span></td></tr>
+        <tr><td>12 · Corey Ganim</td><td><a href="https://www.youtube.com/@coreyganim">@coreyganim</a></td><td>~10–20k (low)</td><td>AI for non-technical operators</td><td>maybe</td></tr>
+        <tr><td>13 · Carter Surach</td><td>Productive Dude</td><td>~10k (low)</td><td>Beginner Claude Code / n8n</td><td>maybe</td></tr>
+        <tr><td>14 · Sean Matthew</td><td>@SeanMatthewAI</td><td>~10–40k <span class="warnflag">⚠️</span></td><td>Claude Code / v0 / Cursor</td><td>maybe</td></tr>
+        <tr><td>15 · Yifan</td><td><a href="https://www.youtube.com/@YifanBTH">@YifanBTH</a></td><td>~15–50k <span class="warnflag">⚠️</span></td><td>Improving AI-coding output</td><td>maybe</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- X -->
+  <section>
+    <div class="lbl">The 50 · 16–23</div>
+    <h2>X / Twitter-first</h2>
+    <table>
+      <thead><tr><th>Name</th><th>Handle</th><th>Est. (conf.)</th><th>Niche</th><th>Host?</th></tr></thead>
+      <tbody>
+        <tr><td>16 · Kevon Cheung</td><td><a href="https://x.com/MeetKevon">@MeetKevon</a></td><td>~24k (high)</td><td>Build-in-public cohorts</td><td><span class="host">Host</span></td></tr>
+        <tr><td>17 · Alyssa X</td><td><a href="https://x.com/alyssaxuu">@alyssaxuu</a></td><td>~42k (high)</td><td>Serial AI maker</td><td><span class="host">Host</span></td></tr>
+        <tr><td>18 · Elie Steinbock</td><td><a href="https://x.com/elie2222">@elie2222</a></td><td>~14k (high)</td><td>Cursor power-user / Ambassador</td><td>maybe</td></tr>
+        <tr><td>19 · Eric Ciarla</td><td><a href="https://x.com/ericciarla">@ericciarla</a></td><td>~16k (high)</td><td>Agent tooling (Firecrawl)</td><td>maybe</td></tr>
+        <tr><td>20 · Hardik Pandya</td><td><a href="https://x.com/hvpandya">@hvpandya</a></td><td>~30k (high)</td><td>Product + AI operator</td><td>maybe</td></tr>
+        <tr><td>21 · sankalp</td><td><a href="https://x.com/dejavucoder">@dejavucoder</a></td><td>~25k (high)</td><td>Claude Code guides</td><td>maybe</td></tr>
+        <tr><td>22 · Greg Kamradt</td><td><a href="https://x.com/GregKamradt">@GregKamradt</a></td><td>~48k <span class="warnflag">⚠️</span></td><td>AI agents (ARC Prize — avail.?)</td><td>maybe</td></tr>
+        <tr><td>23 · Jack Friks <span class="star">★</span></td><td><a href="https://x.com/jackfriks">@jackfriks</a></td><td>~40k (high)</td><td>Solo app maker, build-in-public</td><td>yes</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- LINKEDIN -->
+  <section>
+    <div class="lbl">The 50 · 24–32</div>
+    <h2>LinkedIn — business-buyer credible</h2>
+    <table>
+      <thead><tr><th>Name</th><th>Handle</th><th>Est. (conf.)</th><th>Niche</th><th>Host?</th></tr></thead>
+      <tbody>
+        <tr><td>24 · Jordan Wilson <span class="star">★</span></td><td><a href="https://linkedin.com/in/jordanwilson04">Everyday AI</a></td><td>~25k (high)</td><td>Daily live AI show + podcast</td><td><span class="host">Host</span></td></tr>
+        <tr><td>25 · Victor Dibia</td><td><a href="https://www.linkedin.com/in/dibia">/in/dibia</a></td><td>~18k (high)</td><td>AutoGen core maintainer (MS)</td><td>maybe</td></tr>
+        <tr><td>26 · Aniket Chhetri</td><td><a href="https://linkedin.com/in/aniketchhetri">/in/aniketchhetri</a></td><td>~16k+ (med)</td><td>AI playbooks for creators</td><td>maybe</td></tr>
+        <tr><td>27 · Kieran Gilmurray</td><td><a href="https://linkedin.com/in/kierangilmurray">/in/kierangilmurray</a></td><td>~40k+ <span class="warnflag">⚠️</span></td><td>Agentic / enterprise AI</td><td>maybe</td></tr>
+        <tr><td>28 · Liza Adams <span class="star">NEW</span></td><td><a href="https://www.linkedin.com/in/lizaadams/">/in/lizaadams</a></td><td>~30–45k <span class="warnflag">⚠️</span></td><td>AI for GTM / marketing; ex-CMO</td><td><span class="host">Host</span></td></tr>
+        <tr><td>29 · Mark Kashef <span class="star">NEW</span></td><td><a href="https://www.linkedin.com/in/mkashef/">/in/mkashef</a></td><td>~25–40k <span class="warnflag">⚠️</span></td><td>AI automation agency + community</td><td><span class="host">Host</span></td></tr>
+        <tr><td>30 · Tim Cortinovis <span class="star">NEW</span></td><td><a href="https://www.linkedin.com/in/timcortinovis/">/in/timcortinovis</a></td><td>~20–40k <span class="warnflag">⚠️</span></td><td>Agentic sales (author)</td><td>yes</td></tr>
+        <tr><td>31 · Alexey Grigorev <span class="star">NEW</span></td><td><a href="https://www.linkedin.com/in/agrigorev/">/in/agrigorev</a></td><td>~30–49k <span class="warnflag">⚠️</span></td><td>RAG→agents; runs Maven cohorts</td><td><span class="host">Host</span></td></tr>
+        <tr><td>32 · Heather Murray</td><td>Accessible AI</td><td>~40–50k <span class="warnflag">⚠️</span></td><td>"AI for non-techies"; trains J&amp;J/GSK</td><td><span class="host">Host</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section>
+    <div class="lbl">The 50 · 33–40</div>
+    <h2>Newsletter / Substack — deepest in-band pool</h2>
+    <table>
+      <thead><tr><th>Name</th><th>Handle</th><th>Est. (conf.)</th><th>Niche</th><th>Host?</th></tr></thead>
+      <tbody>
+        <tr><td>33 · Nir Diamant</td><td><a href="https://diamantai.substack.com/">DiamantAI</a></td><td>~36k (high)</td><td>Production GenAI, agentic RAG</td><td><span class="host">Host</span></td></tr>
+        <tr><td>34 · Paolo Perrone</td><td><a href="https://theaiengineer.substack.com/">The AI Engineer</a></td><td>~39k (high)</td><td>Production AI agents</td><td><span class="host">Host</span></td></tr>
+        <tr><td>35 · Andrea Bizzotto</td><td><a href="https://www.youtube.com/@CodeWithAndrea">@CodeWithAndrea</a></td><td>~22k (high)</td><td>Agentic Claude Code</td><td><span class="host">Host</span></td></tr>
+        <tr><td>36 · Owain Lewis <span class="star">★</span></td><td><a href="https://aiengineer.co/">aiengineer.co</a></td><td>~3k news. (high)</td><td>Runs a $69/mo AI-builders community</td><td><span class="host">Host</span></td></tr>
+        <tr><td>37 · Miguel Otero Pedrido</td><td><a href="https://theneuralmaze.substack.com/">The Neural Maze</a></td><td>~15k (med-high)</td><td>End-to-end production agents</td><td><span class="host">Host</span></td></tr>
+        <tr><td>38 · Wyndo Mitra Buwana</td><td><a href="https://aimaker.substack.com/">The AI Maker</a></td><td>~10k (med)</td><td>"Vibe marketing", automation</td><td><span class="host">Host</span></td></tr>
+        <tr><td>39 · Leopoldo García Vargas <span class="star">NEW</span></td><td><a href="https://aienhancedengineer.substack.com/">AI Enhanced Engineer</a></td><td>small (med)</td><td>Production AI / agent architecture</td><td>maybe</td></tr>
+        <tr><td>40 · Michael Cunningham <span class="star">NEW</span></td><td>Building AI Agents</td><td>small (med)</td><td>Autonomous agents briefing</td><td>maybe</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- TIKTOK -->
+  <section>
+    <div class="lbl">The 50 · 41–50</div>
+    <h2>TikTok / Instagram + watchlist</h2>
+    <table>
+      <thead><tr><th>Name</th><th>Handle</th><th>Est. (conf.)</th><th>Niche</th><th>Host?</th></tr></thead>
+      <tbody>
+        <tr><td>41 · Nicole Leffer</td><td><a href="https://www.tiktok.com/@nicoleleffer">@nicoleleffer</a></td><td>~13k (high)</td><td>ChatGPT / gen-AI for B2B marketing</td><td><span class="host">Host</span></td></tr>
+        <tr><td>42 · Rajiv Shah</td><td><a href="https://www.tiktok.com/@rajistics">@rajistics</a></td><td>~31k (high)</td><td>DS / ML / LLMs explained</td><td>yes</td></tr>
+        <tr><td>43 · Catherine Paulin</td><td><a href="https://www.instagram.com/theaigirl/">@theaigirl</a></td><td>~41k <span class="warnflag">⚠️</span></td><td>AI tools; research scientist</td><td>yes</td></tr>
+        <tr><td>44 · @zeenatautomation</td><td><a href="https://www.tiktok.com/@zeenatautomation">@zeenatautomation</a></td><td>~10–40k <span class="warnflag">⚠️</span></td><td>AI automation — n8n / Make</td><td>maybe</td></tr>
+        <tr><td>45 · @oleg.build</td><td><a href="https://www.tiktok.com/@oleg.build">@oleg.build</a></td><td>verify <span class="warnflag">⚠️</span></td><td>Builds with AI, local models</td><td>maybe</td></tr>
+        <tr><td>46 · @kaylaaixo</td><td><a href="https://www.tiktok.com/@kaylaaixo">@kaylaaixo</a></td><td>verify <span class="warnflag">⚠️</span></td><td>Faceless AI-creator builds</td><td>maybe</td></tr>
+        <tr><td>47 · Avthar Sewrathan</td><td><a href="https://www.youtube.com/@avtharai">@avtharai</a></td><td>~15–50k <span class="warnflag">⚠️</span></td><td>Runs paid Maven AI cohorts</td><td><span class="host">Host</span></td></tr>
+        <tr><td>48 · Tony Kipkemboi</td><td><a href="https://www.youtube.com/@tonykipkemboi">@tonykipkemboi</a></td><td>verify <span class="warnflag">⚠️</span></td><td>Ex-CrewAI Sr Dev Advocate</td><td>maybe</td></tr>
+        <tr><td>49 · Prompt Father / Sancho</td><td><a href="https://x.com/prompt_father">@prompt_father</a></td><td>~20–50k <span class="warnflag">⚠️</span></td><td>Runs Lovable builder community</td><td>maybe</td></tr>
+        <tr><td>50 · Carrie Loranger</td><td><a href="https://thrivewithcarrie.substack.com/">9-to-Thrive</a></td><td>~9.8k (med)</td><td>AI content for creators</td><td>maybe</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>Round-2 adds (verified in-band):</strong> Jack Friks (#23 above) · Azamat Galimzhanov <a href="https://www.tiktok.com/@aza_ai_expert">@aza_ai_expert</a> (~20k, AI/neural nets) · John Soldatos <a href="https://www.tiktok.com/@aiotexpert">@aiotexpert</a> (~30k, IoT+AI — adjacent).</div>
+  </section>
+
+  <!-- BIMODAL -->
+  <section>
+    <div class="lbl">Your call</div>
+    <h2>Bimodal — not counted in the 50</h2>
+    <div class="sub">Excellent fits, but large on a second platform — they fail the "under 50k on strongest platform" rule. Include if you switch to "any platform under 50k."</div>
+    <table>
+      <thead><tr><th>Name</th><th>Handle</th><th>The numbers</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>AI Jason (Jason Zhou)</td><td><a href="https://x.com/jasonzhou1993">@jasonzhou1993</a></td><td>~30k X / ~350k YT</td><td>Runs AI Builder Club — exact format. Warmest "yes." Host.</td></tr>
+        <tr><td>Nate Herk</td><td><a href="https://x.com/nateherk">@nateherk</a></td><td>~36k LI / ~500k YT</td><td>Best n8n/agents builder-operator. Host.</td></tr>
+        <tr><td>Alex Finn</td><td><a href="https://www.youtube.com/@AlexFinnOfficial">@AlexFinnOfficial</a></td><td>~55–64k YT (over)</td><td>Runs paid Vibe Coding Academy + Skool. Host.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- NEXT -->
+  <section style="border-bottom:none;">
+    <div class="lbl">Next</div>
+    <h2>Before outreach</h2>
+    <div class="note">
+      1. <strong>Verify pass</strong> (~30 min) on priority + all ⚠️ counts — live reads were blocked.<br>
+      2. <strong>Decide the band rule</strong> — strongest-platform (current) vs any-platform (adds the bimodal three).<br>
+      3. <strong>Public page:</strong> names go on the live site only once a face has agreed — until then this is internal.<br>
+      4. <strong>Deeper expansion</strong> needs manual Social Blade / niche-newsletter mining; public roundups are tapped out for fresh under-50k.
+    </div>
+  </section>
+
+  <footer>The AI Guild · Founding Faces · Internal &amp; confidential · counts are estimates — verify before outreach</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Guild — Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,0,600;9..144,0,700;9..144,1,400;9..144,1,500;9..144,1,600&family=Archivo:wght@400;500;600;700&family=Archivo+Expanded:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f2ea; --paper-2:#efe9dd; --ink:#1c1b18; --ink-soft:#4a463d;
+    --line:#d8cfbe; --accent:#0e6b62; --accent-soft:#0e6b6212; --accent-line:#0e6b6240;
+    --gold:#b07a2c; --rust:#a4452e;
+    --display:'Fraunces',Georgia,serif; --body:'Archivo',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.62;-webkit-font-smoothing:antialiased;padding:0 24px 90px;}
+  .wrap{max-width:900px;margin:0 auto;}
+
+  header.mast{padding:72px 0 36px;border-bottom:2px solid var(--ink);}
+  .kicker{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:24px;}
+  h1{font-family:var(--display);font-weight:600;font-size:clamp(2.7rem,6.5vw,5rem);line-height:.95;letter-spacing:-.025em;margin-bottom:22px;}
+  h1 em{font-style:italic;color:var(--accent);}
+  .lede{font-size:clamp(1.05rem,2vw,1.25rem);color:var(--ink-soft);max-width:62ch;}
+  .meta{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px;}
+  .tag{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding:6px 12px;border:1px solid var(--line);border-radius:100px;color:var(--ink-soft);}
+  .topnav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line);}
+  .topnav .sep{color:var(--gold);font-family:var(--display);font-style:italic;font-size:.95rem;margin-right:6px;}
+  .topnav .doclink{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:7px 14px;border-radius:100px;border:1px solid var(--line);color:var(--ink-soft);text-decoration:none;transition:border-color .15s,color .15s;}
+  .topnav a.doclink:hover{border-color:var(--accent);color:var(--accent);}
+  .topnav .doclink.active{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+
+  nav.toc{padding:34px 0;border-bottom:1px solid var(--line);}
+  nav.toc .lbl{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:18px;}
+  nav.toc ol{list-style:none;counter-reset:t;columns:2;column-gap:46px;}
+  nav.toc li{counter-increment:t;padding:7px 0;border-bottom:1px dotted var(--line);break-inside:avoid;}
+  nav.toc a{color:var(--ink);text-decoration:none;font-size:.96rem;display:flex;gap:12px;align-items:baseline;}
+  nav.toc a:hover{color:var(--accent);}
+  nav.toc a::before{content:counter(t,decimal-leading-zero);font-family:var(--display);font-style:italic;color:var(--gold);font-size:.9rem;}
+
+  section{padding:50px 0;border-bottom:1px solid var(--line);}
+  .sec-num{font-family:var(--display);font-style:italic;color:var(--gold);font-size:1rem;display:block;margin-bottom:8px;}
+  h2{font-family:var(--display);font-weight:600;font-size:clamp(1.7rem,3.6vw,2.5rem);letter-spacing:-.015em;line-height:1.04;margin-bottom:20px;}
+  h3{font-family:var(--body);font-weight:700;font-size:1.05rem;letter-spacing:.01em;margin:28px 0 8px;color:var(--ink);}
+  p{margin-bottom:14px;max-width:68ch;color:var(--ink-soft);}
+  p strong{color:var(--ink);font-weight:600;}
+  .big{font-size:1.14rem;color:var(--ink);}
+  em.it{font-style:italic;}
+
+  .pull{font-family:var(--display);font-size:clamp(1.3rem,3vw,1.85rem);line-height:1.25;color:var(--ink);font-weight:500;border-left:3px solid var(--accent);padding:4px 0 4px 22px;margin:26px 0;max-width:58ch;}
+
+  .fm{background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:14px;padding:16px 20px;margin:20px 0;}
+  .fm .fmh{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+  .fm .fmh::before{content:"◆";font-size:.7rem;}
+  .fm p{margin:0;color:var(--ink);font-size:.96rem;max-width:none;}
+  .fm p+p{margin-top:8px;}
+
+  .gold-box{background:#fffdf7;border:2px solid var(--gold);border-radius:14px;padding:18px 22px;margin:22px 0;}
+  .gold-box .gh{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--gold);margin-bottom:8px;}
+  .gold-box p{margin:0;color:var(--ink);}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px;}
+  .grid.three{grid-template-columns:repeat(3,1fr);}
+  .card{background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:20px;}
+  .card .ic{font-family:var(--display);font-size:1.4rem;color:var(--accent);font-weight:600;}
+  .card h4{font-family:var(--body);font-weight:700;font-size:1.05rem;margin:6px 0 4px;color:var(--ink);}
+  .card span{font-size:.86rem;color:var(--ink-soft);}
+
+  .toolkit{margin-top:18px;}
+  .toolitem{padding:16px 0;border-top:1px solid var(--line);}
+  .toolkit .toolitem:first-child{border-top:none;}
+  .toolitem h4{font-family:var(--body);font-weight:700;font-size:1.05rem;color:var(--ink);margin:0 0 6px;display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;}
+  .toolitem h4 span{font-family:var(--display);font-style:italic;font-weight:500;font-size:.92rem;color:var(--accent);}
+  .toolitem p{font-size:.94rem;max-width:72ch;margin:0;color:var(--ink-soft);}
+
+  .tiers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px;}
+  .tier{border:1px solid var(--line);border-radius:12px;padding:20px;background:#fff;}
+  .tier b{display:block;color:var(--accent);font-size:1rem;margin-bottom:2px;font-family:var(--display);font-weight:600;}
+  .tier .price{font-size:1.7rem;font-weight:700;color:var(--ink);margin:6px 0 10px;font-family:var(--display);}
+  .tier .price small{font-size:.8rem;color:var(--ink-soft);font-weight:500;}
+  .tier ul{list-style:none;}
+  .tier li{font-size:.88rem;color:var(--ink-soft);padding:5px 0 5px 18px;position:relative;}
+  .tier li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:700;}
+
+  ol.rhythm{list-style:none;counter-reset:r;margin-top:8px;}
+  ol.rhythm li{counter-increment:r;position:relative;padding:16px 0 16px 56px;border-top:1px solid var(--line);}
+  ol.rhythm li:first-child{border-top:none;}
+  ol.rhythm li::before{content:counter(r,decimal-leading-zero);position:absolute;left:0;top:16px;font-family:var(--display);font-style:italic;color:var(--gold);font-size:1.3rem;}
+  ol.rhythm li b{display:block;color:var(--ink);font-size:1.04rem;font-weight:700;margin-bottom:3px;}
+  ol.rhythm li small{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700;}
+  ol.rhythm p{margin:4px 0 0;max-width:64ch;}
+
+  table.tbl{width:100%;border-collapse:collapse;margin-top:16px;font-size:.92rem;}
+  table.tbl th{text-align:left;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;padding:10px 12px;border-bottom:2px solid var(--line);}
+  table.tbl td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-soft);}
+  table.tbl td:first-child{color:var(--ink);font-weight:600;}
+  table.tbl tr.tot td{font-weight:700;color:var(--ink);border-top:2px solid var(--ink);}
+  .num{font-variant-numeric:tabular-nums;}
+
+  .dd{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;}
+  .dd .col{border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:#fff;}
+  .dd .col h5{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin-bottom:12px;}
+  .dd .yes h5{color:var(--accent);} .dd .no h5{color:#a4452e;}
+  .dd ul{list-style:none;} .dd li{font-size:.92rem;color:var(--ink-soft);padding:6px 0 6px 20px;position:relative;}
+  .dd .yes li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:700;}
+  .dd .no li::before{content:"✕";position:absolute;left:0;color:#a4452e;font-weight:700;}
+
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px;}
+  .step{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .step b{display:block;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px;}
+  .step span{font-size:.9rem;color:var(--ink);}
+
+  .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px;}
+  .tl{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--paper-2);}
+  .tl b{display:block;font-family:var(--display);font-size:1.1rem;color:var(--gold);margin-bottom:6px;}
+  .tl span{font-size:.86rem;color:var(--ink-soft);}
+
+  ul.q{list-style:none;margin-top:8px;}
+  ul.q li{padding:14px 0 14px 30px;position:relative;border-bottom:1px solid var(--line);color:var(--ink-soft);font-size:.97rem;}
+  ul.q li::before{content:"?";position:absolute;left:0;top:13px;font-family:var(--display);font-style:italic;font-weight:600;color:var(--rust);font-size:1.2rem;}
+  ul.q li b{color:var(--ink);}
+
+  footer{padding:44px 0 0;color:var(--ink-soft);font-size:.85rem;}
+  footer .rule{height:2px;background:var(--ink);margin-bottom:18px;}
+
+  .reveal{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards;}
+  @keyframes rise{to{opacity:1;transform:none;}}
+
+  @media(max-width:680px){
+    .grid,.grid.three,.tiers,.steps,.timeline,.dd{grid-template-columns:1fr;}
+    nav.toc ol{columns:1;}
+    body{padding:0 18px 60px;}
+  }
+  @media print{body{background:#fff;}.reveal{animation:none;opacity:1;transform:none;}section,.card,.fm,.tier,.toolitem{break-inside:avoid;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="topnav reveal">
+    <span class="sep">Mindvalley Community</span>
+    <a class="doclink" href="playbook.html">Community Playbook</a>
+    <a class="doclink" href="finerminds-gap.html">Feature Roadmap</a>
+    <span class="doclink active">AI Guild Proposal</span>
+  </nav>
+
+  <header class="mast reveal">
+    <div class="kicker">Mindvalley × FinerMinds · Proposal v2 · Updated 23 Jun</div>
+    <h1>The AI <em>Guild.</em></h1>
+    <p class="lede">The world's first AI Guild — an application-only network of the people actually building with AI: founders, operators, creators and the up-and-coming influencers teaching it. You join to stay on the frontier, get the latest tools and access, and brush shoulders with the people one step ahead of you. Not a Mindvalley product for Mastery students — a global Guild, like Chief.</p>
+    <div class="meta">
+      <span class="tag">What it is</span><span class="tag">Who's in it</span>
+      <span class="tag">The network effect</span><span class="tag">The offer</span><span class="tag">The launch</span>
+    </div>
+  </header>
+
+  <nav class="toc reveal">
+    <div class="lbl">Contents</div>
+    <ol>
+      <li><a href="#s1">The opportunity</a></li>
+      <li><a href="#s2">What the AI Guild is</a></li>
+      <li><a href="#s3">Who gets in</a></li>
+      <li><a href="#s4">The network effect — the real product</a></li>
+      <li><a href="#s5">What's inside the Guild</a></li>
+      <li><a href="#s6">How it's run</a></li>
+      <li><a href="#s7">The offer &amp; pricing</a></li>
+      <li><a href="#s8">The numbers</a></li>
+      <li><a href="#s9">How we launch</a></li>
+      <li><a href="#s10">Where this goes next</a></li>
+      <li><a href="#s11">Open questions</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1 -->
+  <section id="s1" class="reveal">
+    <span class="sec-num">01 — The opportunity</span>
+    <h2>Build the world's first AI Guild — not a Mastery upsell</h2>
+    <p class="big">The wrong question is "what can we sell our Mastery students?" — that's a small pool and a small ceiling. The right question is "how do we build a $30M product?" That changes everything. We're not building a community for the Mindvalley base. We're building the room that every serious person in AI wants to be in — globally — the way <strong>Chief</strong> built it for women leaders.</p>
+    <p>The paid peer-network model is proven at scale: Chief ($5,800/yr, 120k members, $1.1B valuation), Vistage ($13k/yr, $201M revenue), EO ($2,470/yr, 18k members). They charge $5–25k a year and the cheapest is the floor. Nobody owns the AI niche yet. We can.</p>
+    <p class="pull">The product isn't content. The product is people. You don't join because Mindvalley made it — you join because the people you follow and want to learn from are inside.</p>
+    <div class="gold-box">
+      <div class="gh">The core bet</div>
+      <p>Caliber over quantity. We'd rather grow slowly to 5,000 exceptional members with a real bar, than dump everyone in and have a dead room. The quality of who's in the room is what people pay for and what makes them stay.</p>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section id="s2" class="reveal">
+    <span class="sec-num">02 — What the AI Guild is</span>
+    <h2>A network on the frontier, not a course</h2>
+    <p class="big">A closed, application-only network of people pursuing excellence with AI. You don't enrol — you <em class="it">get in</em>. Its job is to keep you on top of what's changing, connect you with people ahead of you, and get you the tools and access to move faster.</p>
+    <div class="grid">
+      <div class="card"><span class="ic">◇</span><h4>A light, living curriculum</h4><span>Not a fixed syllabus — a stream of what's trending, what's new, what's hot. The "curriculum" is staying current as AI changes weekly.</span></div>
+      <div class="card"><span class="ic">✦</span><h4>Application-only, real guardrails</h4><span>Everyone applies. Like Chief: being qualified isn't enough to get in. A concierge vets every applicant; we reject easily.</span></div>
+      <div class="card"><span class="ic">△</span><h4>Annual subscription</h4><span>Recurring, evergreen, start anytime. Built for retention and predictable revenue.</span></div>
+      <div class="card"><span class="ic">❍</span><h4>AI + human run</h4><span>An AI Guild Master plus a community manager keep the room alive every day, so it never goes quiet.</span></div>
+    </div>
+    <h3>How we're different from Chief</h3>
+    <p>Chief connects women leaders so they have an outlet — they don't share results, revenue or data; it's private peer support. <strong>We do the opposite: we drive and show results.</strong> We help you build your first app, grow your audience, launch a company — and we turn those wins into case studies that prove the room works. Our promise is concrete: <strong>up-to-date information, the latest tools, and the latest people in the game.</strong></p>
+  </section>
+
+  <!-- 3 -->
+  <section id="s3" class="reveal">
+    <span class="sec-num">03 — Who gets in</span>
+    <h2>Builders, not noobs</h2>
+    <p class="big">Founders, operators and creators using AI substantially — people with a business, a product, or real momentum. Doing AI Mastery doesn't get you in. The question is: did you perform, did you learn, are you actually building? The Guild has a bar, and the bar is the point.</p>
+    <h3>The application — everyone applies, free</h3>
+    <p>Applying is free; the gate is caliber, not a fee. The flow mirrors Chief: apply → a concierge reviews the form → a short call → accepted or rejected. The friction is deliberate — it's what makes the badge worth $5,000.</p>
+    <div class="dd">
+      <div class="col yes">
+        <h5>Fast-track — Mastery grads</h5>
+        <ul>
+          <li>Still apply — but a fast-tracked form</li>
+          <li>Approved in ~24 hours if they qualify</li>
+          <li>Must have performed in Mastery, not just enrolled</li>
+          <li>Earns a first-year discount (see §7)</li>
+        </ul>
+      </div>
+      <div class="col no">
+        <h5>Full application — everyone else</h5>
+        <ul>
+          <li>Proper application + concierge call</li>
+          <li>Judged on real expertise &amp; output</li>
+          <li>Rejection is common, by design</li>
+          <li>Rejected? Offered a seat at the next Mastery to qualify later</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:16px;">Turning a rejection into a Mastery invitation does two things: it softens the "no," and it makes Mastery the on-ramp to the Guild — so the Guild pulls people <em class="it">into</em> Mastery, not just out of it.</p>
+  </section>
+
+  <!-- 4 -->
+  <section id="s4" class="reveal">
+    <span class="sec-num">04 — The network effect</span>
+    <h2>The real product is the people in the room</h2>
+    <p class="big">A guild with no one in it is worthless — the first thousand people are everything. So before we sell a single membership, we build the talent layer: the faces people join to be near. We're solving a marketing problem, and influence is how we solve it.</p>
+    <div class="toolkit">
+      <div class="toolitem">
+        <h4>~150 up-and-coming AI influencers <span>the founding faces</span></h4>
+        <p>Not mega-names (they won't contribute, and they're too big to feel exclusive). <strong>Micro-influencers — 10k–50k followers</strong> — who teach AI on Instagram/TikTok, are hustling, and want to grow. We bring them in as founding members and the faces of the Guild, pay them commission on members they bring (e.g. a share of each sale), pay them to run workshops/calls, and give them a stage at the AI Summit. They expose the Guild to their combined audiences; their followers join to be in the room with them. That's the engine.</p>
+      </div>
+      <div class="toolitem">
+        <h4>B2B companies <span>logos + seats</span></h4>
+        <p>Reach out to companies (including via the company emails of people who join) with a launch price — e.g. $1,000/seat instead of $5,000 — to land recognizable logos on the page early. A few marquee company names make the Guild credible to everyone else.</p>
+      </div>
+      <div class="toolitem">
+        <h4>The affiliate / creator base <span>distribution we already have</span></h4>
+        <p>We have ~29,000 affiliate applications on Impact plus our creator lists. Nurtured and educated (which offers convert, how to promote), they become a standing distribution arm for the Guild launch and beyond.</p>
+      </div>
+    </div>
+    <div class="fm">
+      <div class="fmh">Why this comes first</div>
+      <p>In a sales call, the first question is "how many people are in your Guild — and who?" You can't answer "we're about to launch." You answer with names and faces. So we build the founding talent layer <strong>before</strong> we open the doors.</p>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section id="s5" class="reveal">
+    <span class="sec-num">05 — What's inside</span>
+    <h2>The value stack</h2>
+    <p class="big">Pay $5,000 and the value has to be obvious and stacked. Here's what a member gets.</p>
+    <div class="toolkit">
+      <div class="toolitem">
+        <h4>Weekly Guild Master sessions <span>stay current</span></h4>
+        <p>The Guild Master runs frequent, practical sessions on what's new and hot this week — how to use a tool, automate a workflow, solve a real problem (e.g. "edit all your videos with AI," "automate X with Claude"). Plus tool discovery: what's worth it, what isn't.</p>
+      </div>
+      <div class="toolitem">
+        <h4>Monthly expert session <span>the bigger picture</span></h4>
+        <p>One marquee expert a month who's achieved something drastic with AI, teaching the larger play — not just tactics. Drawn from our pool of influencers and operators.</p>
+      </div>
+      <div class="toolitem">
+        <h4>Mastermind pods &amp; project groups <span>solve real problems together</span></h4>
+        <p>Member-led pods around specific AI problems — vibe-coding / Claude Code, social-media growth-hacking, automating work, building an app. Smaller rooms where people actually move their projects forward.</p>
+      </div>
+      <div class="toolitem">
+        <h4>The AI tools wall <span>$50k of value for $5k</span></h4>
+        <p>A wall of AI tools where the Guild is an affiliate and members get 20–30% discounts. Spend $5,000 on the Guild, save $50,000 on tools — the math sells itself, and it's a real revenue line for us.</p>
+      </div>
+      <div class="toolitem">
+        <h4>Product demo &amp; launch days <span>the frontier comes to you</span></h4>
+        <p>Vetted companies launch and demo new AI products inside the Guild (e.g. the next Loom). Members see the newest tools first; companies pay us for the demo day (e.g. ~$50k) and we can affiliate the tool. Members stay on the bleeding edge; we monetize the access.</p>
+      </div>
+      <div class="toolitem">
+        <h4>Talent &amp; connection matching <span>build your AI team</span></h4>
+        <p>Launching an AI company? Find your CPO, your Chief of AI, the developers and designers you need — matched by your goals. The Guild recommends who to meet and brokers the introduction, so the network produces tangible outcomes.</p>
+      </div>
+      <div class="toolitem">
+        <h4>Proof harvesting <span>results, not vanity</span></h4>
+        <p>When a member gets a real result with AI — business grows, audience grows, app ships, company launches — we capture it as a case study showing the Guild drove it. This is our edge over Chief: we prove outcomes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section id="s6" class="reveal">
+    <span class="sec-num">06 — How it's run</span>
+    <h2>One executor, rotating experts, AI underneath</h2>
+    <p class="big">We don't need a separate "author master" and "guild master." One strong operator who genuinely gets AI runs the room and hosts the regular sessions; experts rotate in monthly; an AI Guild Master and concierge carry the daily load.</p>
+    <div class="grid three">
+      <div class="card"><span class="ic">★</span><h4>The Guild Master</h4><span>The executor and face. Runs the weekly update sessions, keeps the room moving, brings the energy. Likely an up-and-coming AI name with real command — not a mega-influencer.</span></div>
+      <div class="card"><span class="ic">✦</span><h4>Monthly experts</h4><span>A rotating marquee guest each month, pulled from the founding influencer pool, on the bigger-picture play.</span></div>
+      <div class="card"><span class="ic">◆</span><h4>AI Guild Master + concierge</h4><span>The AI handles daily engagement, matching and accountability; the human concierge vets applications and handles the high-touch moments.</span></div>
+    </div>
+    <h3>The monthly rhythm</h3>
+    <ol class="rhythm">
+      <li><small>Weekly</small><b>Guild Master update sessions</b><p>Practical, current — what's new this week, tools, automations, execution. ~3 a month.</p></li>
+      <li><small>Monthly</small><b>Expert session</b><p>One marquee guest on how they achieved something drastic with AI.</p></li>
+      <li><small>Daily — AI-run</small><b>Engagement, matching &amp; accountability</b><p>The AI Guild Master keeps the feed alive, makes introductions, runs check-ins.</p></li>
+      <li><small>Always on — member-led</small><b>Mastermind pods &amp; project groups</b><p>Members run their own rooms around the problems they care about.</p></li>
+      <li><small>Ongoing</small><b>Demo days, tool drops &amp; proof harvesting</b><p>New products demoed, tool discounts added, member wins captured as case studies.</p></li>
+    </ol>
+  </section>
+
+  <!-- 7 -->
+  <section id="s7" class="reveal">
+    <span class="sec-num">07 — The offer</span>
+    <h2>The offer &amp; pricing</h2>
+    <p class="big">The industry charges $5–25k a year; $5k is the floor. We price at the floor of premium — high enough to signal caliber, accessible enough to scale. One Guild, one price. We make this one work before we build anything else.</p>
+    <div class="tiers">
+      <div class="tier">
+        <b>AI Guild</b>
+        <div class="price">$5,000<small>/year</small></div>
+        <ul>
+          <li>Full network access &amp; the founding faces</li>
+          <li>Weekly Guild Master sessions + monthly expert</li>
+          <li>Mastermind pods &amp; project groups</li>
+          <li>AI tools wall (20–30% discounts)</li>
+          <li>Demo days, talent matching, AI Guild Master</li>
+        </ul>
+      </div>
+      <div class="tier">
+        <b>Mastery fast-track</b>
+        <div class="price">$2,500<small>/yr · first year only</small></div>
+        <ul>
+          <li>50% off — first year only, then $5,000</li>
+          <li>Only after passing the (fast-tracked) application</li>
+          <li>Rewards performing in Mastery</li>
+          <li>Makes Mastery the on-ramp to the Guild</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:18px;">The 50% Mastery discount applies to the <strong>first year only</strong> — renewals are full price. It incentivizes doing (and performing in) Mastery without permanently discounting the Guild, and the product has to be good enough that they happily renew at $5,000.</p>
+    <p><strong>Beyond subscription, the Guild earns from</strong> product demo days (~$50k each), the AI tools affiliate wall, and B2B seat deals — real revenue lines on top of membership.</p>
+  </section>
+
+  <!-- 8 -->
+  <section id="s8" class="reveal">
+    <span class="sec-num">08 — The numbers</span>
+    <h2>First 1,000 members, then caliber at scale</h2>
+    <p class="big">A premium room still needs critical mass — 200 people where 70% don't show up is a dead Guild. We aim for a <strong>minimum of ~1,000 active, high-caliber members</strong> at launch, then grow the bar, not just the count.</p>
+    <table class="tbl">
+      <thead><tr><th>Members</th><th>Price / yr</th><th>Subscription revenue</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1,000</td><td class="num">$5,000</td><td class="num">$5.0M</td></tr>
+        <tr><td class="num">2,500</td><td class="num">$5,000</td><td class="num">$12.5M</td></tr>
+        <tr class="tot"><td class="num">5,000</td><td class="num">$5,000</td><td class="num">$25.0M</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:14px;">At ~5,000 caliber members, subscriptions alone approach $25M; demo days, the tools affiliate wall and B2B seats bridge to <strong>$30M+</strong> — from this one Guild. The acquisition math: from our internal list, drive <strong>~15,000 applications</strong> and accept roughly <strong>10% (~1,000)</strong>. The waiting list and easy rejection are features — scarcity is what holds the price and the quality.</p>
+    <div class="fm">
+      <div class="fmh">Year-one note</div>
+      <p>Mastery fast-track members come in at $2,500 in year one, so launch-year revenue is a blend — but they renew at full $5,000, so the discount is an acquisition cost, not a permanent haircut.</p>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section id="s9" class="reveal">
+    <span class="sec-num">09 — How we launch</span>
+    <h2>Internal first, external second</h2>
+    <p class="big">Two phases. Internal is easier and comes first — our own list. External is harder and follows — influencers, brands and affiliates. We can launch the offer and collect applications months before the Guild actually opens.</p>
+
+    <h3>Internal launch — to everyone, not just Mastery</h3>
+    <p>Expose the offer to the <strong>whole list</strong>, not only Mastery students — educate them on what it is, then ask them to apply. The application asks if they're a Mastery grad (→ fast-track) or not (→ full application + possible Mastery invitation if rejected). This also surfaces the hidden gems: plenty of people on our list are more advanced than Mastery grads — they just never bought Mastery because they thought it was basic.</p>
+
+    <h3>The marketing — direct, not a boring webinar</h3>
+    <div class="dd">
+      <div class="col yes">
+        <h5>Do</h5>
+        <ul>
+          <li>A short, cool trailer / product video showing the bigger picture</li>
+          <li>A landing page that lays out the features (it's self-explanatory)</li>
+          <li>Free application straight off the page</li>
+          <li>~15 emails + WhatsApp + news-feed, staggered across the month</li>
+          <li>A concierge who personally reviews forms and runs the calls</li>
+        </ul>
+      </div>
+      <div class="col no">
+        <h5>Don't</h5>
+        <ul>
+          <li>A long vision-led VSL (people get turned off)</li>
+          <li>A heavy webinar that explains everything</li>
+          <li>An application fee (free to apply — gate on caliber)</li>
+          <li>Auto-accept anyone, including Mastery grads</li>
+          <li>Trickle people in with no scarcity</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>The timeline</h3>
+    <div class="timeline">
+      <div class="tl"><b>July</b><span>Build the talent layer + page/trailer. Start ~15 staggered application emails. Begin expert/influencer outreach.</span></div>
+      <div class="tl"><b>August</b><span>Open applications. Concierge reviews + booked calls begin. B2B + influencer outreach in full.</span></div>
+      <div class="tl"><b>September</b><span>Keep promoting; staggered acceptance calls; confirm the founding cohort. External hype builds.</span></div>
+      <div class="tl"><b>October</b><span>Guild opens — members get access. External launch moment around the live room.</span></div>
+    </div>
+
+    <h3>External launch</h3>
+    <p>Once the internal cohort and founding faces are locked, go wide: ~150 micro-influencers activating their audiences as affiliates, ~50 brands, and the B2B + Impact affiliate base. By then we can say "here's who's already inside" — which is what makes the external pitch land.</p>
+  </section>
+
+  <!-- 10 -->
+  <section id="s10" class="reveal">
+    <span class="sec-num">10 — Where this goes next</span>
+    <h2>One Guild now. A platform later.</h2>
+    <p class="big">We make the AI Guild excellent first — if it only makes a million, there's no point. Once it works, the bigger picture opens up.</p>
+    <div class="grid">
+      <div class="card"><span class="ic">▣</span><h4>A platform of guilds</h4><span>Eventually anyone on FinerMinds could create their own guild — a plumbing guild, an authorship guild — vetted by application. Mindvalley becomes the rails.</span></div>
+      <div class="card"><span class="ic">◈</span><h4>Brand vs. box</h4><span>Keep the language clean: "Guild" is the premium, $5,000, vetted brand offering. Generic member-created spaces are "communities." Don't blur the two.</span></div>
+      <div class="card"><span class="ic">✦</span><h4>More Mindvalley guilds</h4><span>Social media, authorship, manifesting — later. AI is the easiest and the proof-of-concept; the rest follow once one is a clear success.</span></div>
+      <div class="card"><span class="ic">◐</span><h4>In-person, globally</h4><span>Chief is US-only; we can run meetups anywhere. In-person gatherings are a longer-term edge once the room is full.</span></div>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section id="s11" class="reveal">
+    <span class="sec-num">11 — Open questions</span>
+    <h2>What's still to decide</h2>
+    <ul class="q">
+      <li><b>Who is the Guild Master?</b> The up-and-coming face who runs the room — needs a shortlist of 10–50k-follower AI names (Claude to research). Could one person be both executor and expert lead?</li>
+      <li><b>The 150 influencers.</b> We need the actual list — founding faces + marketing activators. Which of them could lead, and what's the exact commission / founding-member deal?</li>
+      <li><b>Cap size.</b> Hold to ~1,000 minimum and push hard, or start tighter (200) with a bigger waiting list for hype? Leaning ~1,000.</li>
+      <li><b>Exact dates.</b> Confirm October as the open date and the July/August application start.</li>
+      <li><b>Mastery eligibility.</b> Should all Mastery grads even be eligible, or only those who genuinely performed? How strict is the fast-track bar?</li>
+      <li><b>B2B pricing.</b> Confirm the discounted seat price for companies (~$1,000) and which logos to chase first.</li>
+    </ul>
+    <div class="gold-box">
+      <div class="gh">Next artifacts</div>
+      <p>1 — The launch <strong>landing page</strong> (trailer + features + free application). 2 — A researched <strong>shortlist of up-and-coming AI micro-influencers</strong> (10–50k) for founding faces + the 150-person marketing list. Say the word and I'll build both.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="rule"></div>
+    The AI Guild — Proposal v2 · Mindvalley × FinerMinds · The world's first AI Guild · Internal &amp; confidential
+  </footer>
+
+</div>
+</body>
+</html>

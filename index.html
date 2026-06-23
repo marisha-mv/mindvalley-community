@@ -3,30 +3,170 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mindvalley Community — Working Docs</title>
+<title>The AI Guild — Project Hub</title>
+<meta name="description" content="The AI Guild by Mindvalley — the page, the application, the proposal, and the community system.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,0,600;9..144,0,700;9..144,1,400;9..144,1,500;9..144,1,600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; max-width: 720px; margin: 60px auto; padding: 0 24px; color: #1a1a1a; line-height: 1.6; }
-  h1 { font-size: 28px; margin-bottom: 8px; }
-  p.lede { color: #555; margin-top: 0; }
-  ul { list-style: none; padding: 0; margin-top: 32px; }
-  li { padding: 16px 0; border-bottom: 1px solid #eee; }
-  a { color: #0a66c2; text-decoration: none; font-weight: 500; }
-  a:hover { text-decoration: underline; }
-  .desc { color: #666; font-size: 14px; margin-top: 4px; }
+  :root{
+    --paper:#f7f3ec; --paper-2:#efe9dd; --card:#ffffff; --ink:#16150f; --ink-2:#43403a;
+    --soft:#6a665d; --line:#e0d8c8; --line-2:#cdc3af;
+    --accent:#0e6b62; --gold:#a9772a; --ink-deep:#11140f;
+    --display:'Fraunces',Georgia,serif; --body:'Archivo',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--accent);color:#fff;}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 30px;}
+
+  h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;line-height:1.04;}
+  h1 em{font-style:italic;color:var(--gold);font-weight:500;}
+  .eyebrow{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:700;}
+
+  header.mast{padding:84px 0 30px;border-bottom:2px solid var(--ink);}
+  header.mast h1{font-size:clamp(2.6rem,6vw,4.4rem);margin:18px 0 18px;}
+  header.mast p{color:var(--ink-2);font-size:1.12rem;max-width:56ch;}
+  .mast .meta{margin-top:24px;display:flex;flex-wrap:wrap;gap:9px;}
+  .tag{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:6px 12px;border:1px solid var(--line-2);border-radius:100px;color:var(--soft);}
+
+  .group{padding:48px 0 8px;}
+  .glabel{font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px;}
+  .gsub{color:var(--soft);font-size:.95rem;margin-bottom:24px;}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+
+  .tile{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;transition:transform .25s,border-color .25s,box-shadow .25s;position:relative;overflow:hidden;}
+  .tile:hover{transform:translateY(-4px);border-color:var(--line-2);box-shadow:0 36px 70px -50px rgba(0,0,0,.4);}
+  .tile .kind{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:14px;}
+  .tile h3{font-size:1.55rem;margin-bottom:8px;}
+  .tile h3 em{font-style:italic;color:var(--gold);}
+  .tile p{color:var(--ink-2);font-size:.94rem;margin-bottom:20px;flex:1;}
+  .tile .go{display:inline-flex;align-items:center;gap:8px;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink);}
+  .tile .go .ar{transition:transform .2s;}
+  .tile:hover .go .ar{transform:translateX(4px);}
+  .tile .go{color:var(--accent);}
+
+  /* hero feature tile (the website) */
+  .tile.feature{grid-column:1 / -1;background:var(--ink-deep);color:var(--paper);border-color:transparent;flex-direction:row;align-items:center;gap:34px;padding:34px 36px;}
+  .tile.feature .ftext{flex:1;}
+  .tile.feature .kind{color:#5fe0bd;}
+  .tile.feature h3{font-size:2rem;color:var(--paper);}
+  .tile.feature h3 em{color:var(--gold);}
+  .tile.feature p{color:#cdd4cb;}
+  .tile.feature .go{color:#5fe0bd;}
+  .miniwin{flex:none;width:230px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:linear-gradient(150deg,#13201b,#0a1410);}
+  .miniwin .mb{display:flex;gap:5px;padding:9px 11px;border-bottom:1px solid rgba(255,255,255,.08);}
+  .miniwin .md{width:7px;height:7px;border-radius:50%;background:#2a3a34;}
+  .miniwin .mc{padding:16px 14px;}
+  .miniwin .mh{font-family:var(--display);font-size:1.05rem;color:#f2ede1;line-height:1.1;margin-bottom:8px;}
+  .miniwin .mh em{font-style:italic;color:var(--gold);}
+  .miniwin .mp{height:6px;border-radius:4px;background:rgba(255,255,255,.1);margin-bottom:6px;}
+  .miniwin .mp.s{width:60%;}
+  .miniwin .pill{display:inline-block;margin-top:10px;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#04110c;background:#37d3a9;border-radius:100px;padding:5px 11px;}
+
+  footer{padding:40px 0;border-top:1px solid var(--line);color:var(--soft);font-size:.78rem;margin-top:30px;}
+  .note{font-size:.82rem;color:var(--soft);font-style:italic;font-family:var(--display);margin-top:6px;}
+
+  @media(max-width:760px){
+    .grid{grid-template-columns:1fr;}
+    .tile.feature{flex-direction:column;align-items:flex-start;}
+    .miniwin{width:100%;}
+    header.mast{padding:60px 0 26px;}
+  }
 </style>
 </head>
 <body>
-  <h1>Mindvalley Community — Working Docs</h1>
-  <p class="lede">Playbook and gap analysis.</p>
-  <ul>
-    <li>
-      <a href="playbook.html">Mindvalley Community Playbook</a>
-      <div class="desc">Current playbook.</div>
-    </li>
-    <li>
-      <a href="finerminds-gap.html">FinerMinds Community — Feature Gap</a>
-      <div class="desc">Feature gap analysis vs. FinerMinds.</div>
-    </li>
-  </ul>
+<div class="wrap">
+
+  <header class="mast">
+    <div class="eyebrow">Mindvalley × FinerMinds · Project Hub</div>
+    <h1>The AI <em>Guild.</em></h1>
+    <p>Everything in one place — the public page, the founding-cohort application, the strategy behind it, and the community system it runs on.</p>
+    <div class="meta">
+      <span class="tag">The Page</span><span class="tag">The Application</span>
+      <span class="tag">The Proposal</span><span class="tag">The System</span>
+    </div>
+  </header>
+
+  <!-- THE PRODUCT -->
+  <div class="group">
+    <div class="glabel">The product</div>
+    <div class="gsub">What the world sees, and how they get in.</div>
+    <div class="grid">
+
+      <!-- feature: the website -->
+      <a class="tile feature" href="ai-guild.html">
+        <div class="ftext">
+          <div class="kind">Landing Page · Live preview</div>
+          <h3>The AI Guild <em>website</em></h3>
+          <p>The public launch page — Ogilvy headline, Hormozi offer, branding-agency polish, trailer-film hero. Modeled on the best paid-network pages.</p>
+          <span class="go">Open the page <span class="ar">→</span></span>
+        </div>
+        <div class="miniwin" aria-hidden="true">
+          <div class="mb"><span class="md"></span><span class="md"></span><span class="md"></span></div>
+          <div class="mc">
+            <div class="mh">Home to the world's best <em>AI builders.</em></div>
+            <div class="mp"></div><div class="mp s"></div>
+            <span class="pill">Apply Now</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="tile" href="apply.html">
+        <div class="kind">Application</div>
+        <h3>Apply to the <em>Guild</em></h3>
+        <p>The detailed, vetted founding-cohort application. An application, not a checkout — eight sections, reviewed by a human.</p>
+        <span class="go">Open the application <span class="ar">→</span></span>
+      </a>
+
+      <a class="tile" href="guild-proposal.html">
+        <div class="kind">Strategy</div>
+        <h3>The <em>Proposal</em></h3>
+        <p>What it is, who it's for, the network-effect engine, the offer &amp; pricing, and the full launch plan.</p>
+        <span class="go">Read the proposal <span class="ar">→</span></span>
+      </a>
+
+      <a class="tile" href="founding-faces.html">
+        <div class="kind">Recruitment · Internal</div>
+        <h3>Founding <em>Faces</em></h3>
+        <p>50 up-and-coming AI micro-influencers (under 50k) to recruit as founding faces, affiliates and Guild Master candidates.</p>
+        <span class="go">See the shortlist <span class="ar">→</span></span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- THE SYSTEM -->
+  <div class="group">
+    <div class="glabel">The community system</div>
+    <div class="gsub">The platform and playbook the Guild is built on.</div>
+    <div class="grid">
+
+      <a class="tile" href="playbook.html">
+        <div class="kind">Playbook</div>
+        <h3>Community <em>Playbook</em></h3>
+        <p>How we run community at Mindvalley — strategy, operating rhythm, standards and the FinerMinds toolkit.</p>
+        <span class="go">Read the playbook <span class="ar">→</span></span>
+      </a>
+
+      <a class="tile" href="finerminds-gap.html">
+        <div class="kind">Roadmap</div>
+        <h3>Feature <em>Roadmap</em></h3>
+        <p>What FinerMinds has today, what to build next, and the principles that turn features into retention.</p>
+        <span class="go">See the roadmap <span class="ar">→</span></span>
+      </a>
+
+    </div>
+  </div>
+
+  <footer>
+    The AI Guild · Mindvalley × FinerMinds · Internal &amp; confidential
+    <div class="note">Pages are prototypes for internal review. Founding faces, trailer film and live form capture still to come.</div>
+  </footer>
+
+</div>
 </body>
 </html>

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Guild — Home to the world's best AI builders</title>
+<meta name="description" content="A private, application-only network where the best builders in AI get better, together.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,0,600;9..144,0,700;9..144,1,400;9..144,1,500;9..144,1,600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f3ec; --paper-2:#efe9dd; --card:#ffffff; --ink:#16150f; --ink-2:#43403a;
+    --soft:#6a665d; --line:#e0d8c8; --line-2:#cdc3af;
+    --accent:#0e6b62; --accent-2:#0a544c; --gold:#a9772a; --ink-deep:#11140f;
+    --display:'Fraunces',Georgia,serif; --body:'Archivo',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 30px;}
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--accent);color:#fff;}
+
+  /* nav */
+  nav.top{position:fixed;top:0;left:0;right:0;z-index:60;transition:background .3s,border-color .3s,backdrop-filter .3s;border-bottom:1px solid transparent;}
+  nav.top.scrolled{background:rgba(247,243,236,.82);backdrop-filter:blur(14px) saturate(140%);border-bottom:1px solid var(--line);}
+  nav.top .inner{display:flex;align-items:center;justify-content:space-between;padding:17px 30px;max-width:1120px;margin:0 auto;}
+  .logo{font-family:var(--display);font-weight:600;font-size:1.12rem;}
+  .logo em{font-style:italic;color:var(--gold);}
+  .navby{font-size:.64rem;letter-spacing:.26em;text-transform:uppercase;color:var(--soft);}
+  .navcta{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;background:var(--ink);color:var(--paper);border-radius:100px;padding:10px 20px;transition:background .2s,transform .15s;}
+  .navcta:hover{background:var(--accent);transform:translateY(-1px);}
+
+  .rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);}
+  .rv.in{opacity:1;transform:none;}
+  .rv.d1{transition-delay:.08s;}.rv.d2{transition-delay:.16s;}.rv.d3{transition-delay:.24s;}.rv.d4{transition-delay:.32s;}
+
+  .eyebrow{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:700;}
+  h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.025em;line-height:1.0;}
+  h1 em,h2 em{font-style:italic;color:var(--gold);font-weight:500;}
+
+  /* HERO */
+  header.hero{padding:140px 0 70px;text-align:center;}
+  header.hero h1{font-size:clamp(2.9rem,7vw,5.6rem);margin:22px auto 24px;max-width:16ch;}
+  header.hero .sub{font-size:clamp(1.1rem,1.9vw,1.4rem);color:var(--ink-2);max-width:44ch;margin:0 auto 34px;line-height:1.45;}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .cta{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--paper);font-weight:700;font-size:.9rem;letter-spacing:.04em;text-transform:uppercase;padding:16px 32px;border-radius:100px;transition:transform .15s,background .2s,box-shadow .3s;}
+  .cta:hover{transform:translateY(-2px);background:var(--accent);box-shadow:0 16px 36px -16px rgba(14,107,98,.55);}
+  .cta.ghost{background:transparent;color:var(--ink);border:1px solid var(--line-2);}
+  .cta.ghost:hover{background:transparent;border-color:var(--accent);color:var(--accent);box-shadow:none;}
+  .cta .pl{width:9px;height:11px;background:currentColor;clip-path:polygon(0 0,100% 50%,0 100%);}
+
+  /* trailer */
+  .film{max-width:960px;margin:54px auto 0;}
+  .videobox{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:16/9;background:linear-gradient(150deg,#13201b,#0a1410);border:1px solid var(--line-2);box-shadow:0 50px 110px -50px rgba(0,0,0,.5);cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .videobox::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 120% at 50% 30%,rgba(55,211,169,.12),transparent 60%);}
+  .play{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:16px;color:#f2ede1;}
+  .play .ring{width:78px;height:78px;border-radius:50%;border:1.5px solid rgba(242,237,225,.6);display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s;}
+  .videobox:hover .play .ring{transform:scale(1.06);background:rgba(242,237,225,.1);}
+  .play .tri{width:18px;height:22px;background:#f2ede1;clip-path:polygon(0 0,100% 50%,0 100%);margin-left:5px;}
+  .play .cap{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(242,237,225,.75);}
+  .filmnote{text-align:center;font-size:.8rem;color:var(--soft);margin-top:16px;font-style:italic;font-family:var(--display);}
+
+  /* marquee */
+  .marquee{margin-top:64px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:24px 0;overflow:hidden;}
+  .marquee .ml{font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--soft);text-align:center;margin-bottom:16px;}
+  .track{display:flex;gap:48px;white-space:nowrap;animation:scroll 32s linear infinite;width:max-content;}
+  .track span{font-family:var(--display);font-size:1.25rem;color:var(--ink-2);opacity:.7;}
+  @keyframes scroll{to{transform:translateX(-50%);}}
+
+  /* sections */
+  section{padding:100px 0;}
+  .center{text-align:center;}
+  .lbl{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:18px;}
+  h2.big{font-size:clamp(2.2rem,4.8vw,3.7rem);}
+  .lead{font-size:clamp(1.05rem,1.6vw,1.28rem);color:var(--ink-2);max-width:52ch;line-height:1.5;margin-top:20px;}
+  .center .lead{margin-left:auto;margin-right:auto;}
+
+  /* manifesto */
+  .manifesto{background:var(--ink-deep);color:var(--paper);border-radius:0;}
+  .pho{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:26px;}
+  .pho .word{font-family:var(--display);font-size:clamp(2.4rem,6vw,4rem);font-weight:600;letter-spacing:-.02em;}
+  .pho .ipa{font-family:var(--display);font-style:italic;font-size:1.2rem;color:#9fae9f;}
+  .manifesto p{font-size:clamp(1.2rem,2.4vw,1.7rem);font-family:var(--display);font-weight:400;line-height:1.4;color:#eadfc9;max-width:30ch;}
+  .manifesto p em{font-style:italic;color:var(--gold);}
+
+  /* OFFER value stack */
+  .stack{max-width:760px;margin:46px auto 0;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 28px 26px;box-shadow:0 40px 90px -55px rgba(0,0,0,.4);}
+  .srow{display:flex;align-items:baseline;justify-content:space-between;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);}
+  .srow .sn{font-size:1rem;color:var(--ink);font-weight:600;}
+  .srow .sn small{display:block;font-weight:400;font-size:.82rem;color:var(--soft);margin-top:2px;}
+  .srow .sv{font-family:var(--display);font-size:1.05rem;color:var(--ink);white-space:nowrap;}
+  .srow.total{border-bottom:none;border-top:2px solid var(--ink);margin-top:4px;padding-top:18px;}
+  .srow.total .sn{font-family:var(--display);font-size:1.2rem;}
+  .srow.total .sv{font-size:1.4rem;color:var(--accent);font-weight:600;}
+  .pricepunch{text-align:center;margin-top:30px;}
+  .pricepunch .strike{font-family:var(--display);font-size:1.3rem;color:var(--soft);text-decoration:line-through;}
+  .pricepunch .now{font-family:var(--display);font-size:clamp(2.6rem,6vw,4rem);font-weight:600;letter-spacing:-.03em;display:block;margin-top:6px;}
+  .pricepunch .now em{font-style:italic;color:var(--gold);}
+  .pricepunch .pp{font-size:.9rem;color:var(--soft);margin-top:8px;}
+
+  /* offerings cards */
+  .offers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;}
+  .ocard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;transition:transform .3s,border-color .3s,box-shadow .3s;}
+  .ocard:hover{transform:translateY(-4px);border-color:var(--line-2);box-shadow:0 30px 60px -45px rgba(0,0,0,.35);}
+  .ocard .on{font-family:var(--display);font-style:italic;color:var(--gold);font-size:1rem;}
+  .ocard h4{font-family:var(--display);font-weight:600;font-size:1.35rem;margin:8px 0 8px;letter-spacing:-.01em;}
+  .ocard p{font-size:.92rem;color:var(--ink-2);margin:0;line-height:1.5;}
+
+  /* faces */
+  .facegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-top:46px;}
+  .fc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 16px;text-align:center;transition:transform .3s;}
+  .fc:hover{transform:translateY(-4px);}
+  .fc .fav{width:66px;height:66px;border-radius:50%;margin:0 auto 12px;background:linear-gradient(135deg,#e7ddc8,#cfe3da);border:1px solid var(--line);}
+  .fc .fn{font-size:.9rem;color:var(--ink);font-weight:600;}
+  .fc .fh{font-size:.74rem;color:var(--soft);margin-top:2px;}
+  .fc .ft{display:inline-block;margin-top:10px;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:100px;padding:3px 9px;}
+  .reveal-note{text-align:center;margin-top:26px;font-size:.92rem;color:var(--soft);font-style:italic;font-family:var(--display);}
+
+  /* stats */
+  .stats{background:var(--ink-deep);color:var(--paper);}
+  .statgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:10px;}
+  .stat{text-align:center;}
+  .stat b{font-family:var(--display);font-weight:600;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.02em;display:block;}
+  .stat span{font-size:.8rem;color:#9fae9f;letter-spacing:.04em;}
+
+  /* testimonials */
+  .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px;}
+  .tc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;}
+  .tc p{font-family:var(--display);font-size:1.02rem;line-height:1.45;color:var(--ink);margin:0 0 16px;}
+  .tc .who{display:flex;align-items:center;gap:11px;}
+  .tc .av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#e7ddc8,#cfe3da);}
+  .tc .who b{display:block;font-family:var(--body);font-size:.85rem;font-weight:600;}
+  .tc .who span{font-size:.76rem;color:var(--soft);}
+
+  /* guarantee */
+  .guarantee{max-width:720px;margin:0 auto;text-align:center;background:var(--card);border:1px solid var(--line-2);border-radius:20px;padding:44px 40px;box-shadow:0 40px 90px -55px rgba(0,0,0,.4);}
+  .guarantee .seal{font-family:var(--display);font-style:italic;color:var(--gold);font-size:1rem;margin-bottom:14px;}
+  .guarantee h3{font-size:clamp(1.7rem,3.4vw,2.4rem);margin-bottom:14px;}
+  .guarantee p{color:var(--ink-2);max-width:50ch;margin:0 auto;font-size:1.02rem;}
+
+  /* pricing */
+  .price{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:46px;}
+  .pcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:34px;}
+  .pcard.feat{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset;}
+  .pcard .pt{font-family:var(--display);font-weight:600;font-size:1.2rem;color:var(--gold);}
+  .pcard .amt{font-family:var(--display);font-size:3rem;font-weight:600;letter-spacing:-.03em;margin:10px 0 4px;}
+  .pcard .amt small{font-size:.95rem;color:var(--soft);font-weight:500;}
+  .pcard .pn{font-size:.9rem;color:var(--ink-2);margin-bottom:18px;}
+  .pcard ul{list-style:none;}
+  .pcard li{font-size:.9rem;color:var(--ink-2);padding:7px 0 7px 22px;position:relative;}
+  .pcard li::before{content:"";position:absolute;left:0;top:13px;width:7px;height:7px;border-radius:50%;background:var(--accent);}
+  .scarcity{text-align:center;margin-top:28px;font-size:.92rem;color:var(--soft);}
+  .scarcity b{color:var(--ink);}
+
+  /* faq */
+  .faq{max-width:780px;margin:40px auto 0;}
+  details{border-bottom:1px solid var(--line);padding:6px 0;}
+  summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:18px 0;font-family:var(--display);font-size:1.12rem;font-weight:500;color:var(--ink);}
+  summary::-webkit-details-marker{display:none;}
+  summary .pm{font-family:var(--body);font-size:1.4rem;color:var(--accent);transition:transform .2s;}
+  details[open] summary .pm{transform:rotate(45deg);}
+  details p{color:var(--ink-2);font-size:.96rem;padding:0 0 20px;max-width:64ch;}
+
+  /* apply */
+  #apply{background:var(--ink-deep);color:var(--paper);}
+  #apply h2.big em{color:var(--gold);}
+  #apply .lead{color:#cdd4cb;}
+  .applybox{max-width:560px;margin:44px auto 0;background:#16201b;border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:38px 34px;box-shadow:0 50px 110px -50px rgba(0,0,0,.7);text-align:left;}
+  .applybox .fee{font-size:.82rem;color:#5fe0bd;font-weight:600;text-align:center;margin-bottom:24px;letter-spacing:.02em;}
+  .applybox label{display:block;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#8a948c;font-weight:700;margin:16px 0 6px;}
+  .applybox input,.applybox select,.applybox textarea{width:100%;background:#0d1511;border:1px solid rgba(255,255,255,.14);border-radius:11px;padding:13px 15px;color:var(--paper);font-family:var(--body);font-size:.96rem;transition:border-color .2s;}
+  .applybox input:focus,.applybox select:focus,.applybox textarea:focus{outline:none;border-color:var(--accent);}
+  .applybox input::placeholder,.applybox textarea::placeholder{color:#5a655d;}
+  .applybox textarea{resize:vertical;min-height:70px;}
+  .applybox .btn{width:100%;margin-top:24px;background:#37d3a9;color:#04110c;border:none;border-radius:100px;padding:16px;font-family:var(--body);font-weight:700;font-size:.95rem;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:transform .15s,background .2s;}
+  .applybox .btn:hover{background:#46e3b8;transform:translateY(-1px);}
+  .applybox .fine{font-size:.74rem;color:#8a948c;margin-top:14px;text-align:center;line-height:1.5;}
+  .ok{display:none;text-align:center;padding:26px 4px;}
+  .ok h4{font-family:var(--display);font-size:1.8rem;color:#5fe0bd;margin-bottom:10px;}
+  .ok p{color:#cdd4cb;font-size:.95rem;max-width:38ch;margin:0 auto;}
+
+  footer{padding:40px 0;border-top:1px solid var(--line);color:var(--soft);font-size:.78rem;text-align:center;letter-spacing:.03em;}
+
+  @media(max-width:860px){
+    .offers,.tgrid{grid-template-columns:1fr;}
+    .statgrid{grid-template-columns:repeat(2,1fr);}
+    .price{grid-template-columns:1fr;}
+    section{padding:72px 0;}
+    header.hero{padding:120px 0 60px;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="top" id="nav">
+  <div class="inner">
+    <div class="logo">The AI <em>Guild</em></div>
+    <div class="navby">A Mindvalley Network</div>
+    <a class="navcta" href="apply.html">Apply Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow rv in">Application Only · Founding Cohort 2026</div>
+    <h1 class="rv in d1">Home to the world's best <em>AI builders.</em></h1>
+    <p class="sub rv in d2">A private network where founders, operators and creators building with AI get better — together, and faster than everyone else.</p>
+    <div class="cta-row rv in d3">
+      <a class="cta" href="apply.html">Apply Now</a>
+      <a class="cta ghost" href="#film"><span class="pl"></span> Watch the film</a>
+    </div>
+
+    <div class="film rv in d4" id="film">
+      <div class="videobox" onclick="this.querySelector('.cap').textContent='Trailer coming soon'">
+        <div class="play">
+          <div class="ring"><span class="tri"></span></div>
+          <div class="cap">The film · 90 seconds</div>
+        </div>
+      </div>
+      <div class="filmnote">A 90-second trailer — the room, the people, the frontier.</div>
+    </div>
+
+    <div class="marquee rv">
+      <div class="ml">Stay fluent in everything that matters</div>
+      <div class="track">
+        <span>Claude</span><span>OpenAI</span><span>Cursor</span><span>Midjourney</span><span>Runway</span><span>ElevenLabs</span><span>Perplexity</span><span>Suno</span><span>HeyGen</span><span>Replit</span>
+        <span>Claude</span><span>OpenAI</span><span>Cursor</span><span>Midjourney</span><span>Runway</span><span>ElevenLabs</span><span>Perplexity</span><span>Suno</span><span>HeyGen</span><span>Replit</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="wrap">
+    <div class="pho rv"><span class="word">Build·er</span><span class="ipa">/ˈbildər/ &nbsp;noun</span></div>
+    <p class="rv d1">We don't wait for the future — we ship it. Untethered to one tool or one title. Fluent in what dropped this week, building what others are still <em>reading about.</em> The Guild is where we get better, together.</p>
+  </div>
+</section>
+
+<!-- THE OFFER -->
+<section class="center">
+  <div class="wrap">
+    <div class="lbl rv">The offer</div>
+    <h2 class="big rv d1">The most valuable room <em>in AI.</em></h2>
+    <p class="lead rv d2">One membership. Everything you need to stay ahead — and the people who keep you there.</p>
+
+    <div class="stack rv d2">
+      <div class="srow"><span class="sn">Weekly Frontier Sessions<small>What dropped this week, and how to use it</small></span><span class="sv">$6,000/yr</span></div>
+      <div class="srow"><span class="sn">Monthly Marquee Expert<small>The builder who did it — live</small></span><span class="sv">$3,600/yr</span></div>
+      <div class="srow"><span class="sn">Mastermind Pods &amp; Project Groups<small>Move your build forward with the right people</small></span><span class="sv">$4,800/yr</span></div>
+      <div class="srow"><span class="sn">The AI Tools Wall<small>20–30% off the entire stack</small></span><span class="sv">$50,000+/yr</span></div>
+      <div class="srow"><span class="sn">Demo Days — first access<small>The next wave, before the world sees it</small></span><span class="sv">$2,400/yr</span></div>
+      <div class="srow"><span class="sn">Talent &amp; Connection Matching<small>Find your CPO, your engineers, your designers</small></span><span class="sv">$6,000/yr</span></div>
+      <div class="srow"><span class="sn">The Network &amp; the founding faces<small>The room itself — who you brush shoulders with</small></span><span class="sv">Priceless</span></div>
+      <div class="srow total"><span class="sn">Total value</span><span class="sv">$72,800+/yr</span></div>
+    </div>
+
+    <div class="pricepunch rv d2">
+      <span class="strike">$72,800</span>
+      <span class="now">Your price: <em>$5,000</em><span style="font-size:1rem;color:var(--soft);font-weight:400;"> / year</span></span>
+      <div class="pp">Less than what most members save on tools alone.</div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERINGS -->
+<section>
+  <div class="wrap center">
+    <div class="lbl rv">Inside the Guild</div>
+    <h2 class="big rv d1">Five reasons it's <em>unmissable.</em></h2>
+  </div>
+  <div class="wrap">
+    <div class="offers">
+      <div class="ocard rv"><div class="on">01</div><h4>Learn the frontier</h4><p>Weekly sessions on what just dropped and how to use it Monday morning. One marquee builder a month on the bigger play.</p></div>
+      <div class="ocard rv d1"><div class="on">02</div><h4>Connect with peers</h4><p>Mastermind pods and project groups around the problems you care about — vibe-coding, growth, agents, building your app.</p></div>
+      <div class="ocard rv d2"><div class="on">03</div><h4>The tools wall</h4><p>20–30% off the AI stack you already pay for. Spend $5k on the Guild, save far more than that on software.</p></div>
+      <div class="ocard rv"><div class="on">04</div><h4>Demo days</h4><p>The companies building tomorrow's tools launch inside the Guild first — with member-only access and pricing.</p></div>
+      <div class="ocard rv d1"><div class="on">05</div><h4>Talent matching</h4><p>Building something? Find your CPO, engineers and designers — matched to your goals and personally introduced.</p></div>
+      <div class="ocard rv d2"><div class="on">★</div><h4>The room</h4><p>The founding faces and the people one step ahead of you. The reason you stay — and the reason it compounds.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FACES -->
+<section class="center">
+  <div class="wrap">
+    <div class="lbl rv">The founding faces</div>
+    <h2 class="big rv d1">You join for <em>who's</em> in the room.</h2>
+    <p class="lead rv d2">Not because Mindvalley made it — because the builders you follow are inside.</p>
+  </div>
+  <div class="wrap">
+    <div class="facegrid">
+      <div class="fc rv"><div class="fav"></div><div class="fn">Founding Face</div><div class="fh">@handle · 38k</div><div class="ft">Automation</div></div>
+      <div class="fc rv d1"><div class="fav"></div><div class="fn">Founding Face</div><div class="fh">@handle · 24k</div><div class="ft">Vibe-coding</div></div>
+      <div class="fc rv d2"><div class="fav"></div><div class="fn">Founding Face</div><div class="fh">@handle · 51k</div><div class="ft">AI Video</div></div>
+      <div class="fc rv d3"><div class="fav"></div><div class="fn">Founding Face</div><div class="fh">@handle · 19k</div><div class="ft">No-code</div></div>
+      <div class="fc rv"><div class="fav"></div><div class="fn">Founding Face</div><div class="fh">@handle · 33k</div><div class="ft">Founders</div></div>
+      <div class="fc rv d1"><div class="fav"></div><div class="fn">Founding Face</div><div class="fh">@handle · 45k</div><div class="ft">Agents</div></div>
+      <div class="fc rv d2"><div class="fav"></div><div class="fn">Founding Face</div><div class="fh">@handle · 28k</div><div class="ft">Marketing</div></div>
+      <div class="fc rv d3"><div class="fav"></div><div class="fn">Founding Face</div><div class="fh">@handle · 22k</div><div class="ft">Prompting</div></div>
+    </div>
+    <p class="reveal-note rv">Revealed at launch.</p>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats center">
+  <div class="wrap">
+    <div class="lbl rv" style="color:var(--gold)">Excellence in numbers</div>
+    <h2 class="big rv d1" style="color:var(--paper)">A room worth getting into.</h2>
+    <div class="statgrid" style="margin-top:46px;">
+      <div class="stat rv"><b>$50k+</b><span>In tools, yours</span></div>
+      <div class="stat rv d1"><b>1,000</b><span>Founding seats</span></div>
+      <div class="stat rv d2"><b>10%</b><span>Acceptance rate</span></div>
+      <div class="stat rv d3"><b>150+</b><span>Founding builders</span></div>
+      <div class="stat rv d4"><b>Weekly</b><span>Frontier sessions</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="center">
+  <div class="wrap">
+    <div class="lbl rv">From the room</div>
+    <h2 class="big rv d1">What members <em>say.</em></h2>
+  </div>
+  <div class="wrap">
+    <div class="tgrid">
+      <div class="tc rv"><p>"I shipped my first AI product in three weeks. The pod didn't let me stall."</p><div class="who"><span class="av"></span><div><b>Founding member</b><span>Founder · illustrative</span></div></div></div>
+      <div class="tc rv d1"><p>"It's the ultimate 'phone a friend.' Whatever I'm stuck on, someone in here has solved it."</p><div class="who"><span class="av"></span><div><b>Founding member</b><span>Operator · illustrative</span></div></div></div>
+      <div class="tc rv d2"><p>"I stay a month ahead of everyone in my market — just by being in the room."</p><div class="who"><span class="av"></span><div><b>Founding member</b><span>Creator · illustrative</span></div></div></div>
+    </div>
+    <p class="reveal-note rv">Real member stories captured at launch.</p>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section>
+  <div class="wrap">
+    <div class="guarantee rv">
+      <div class="seal">Our promise</div>
+      <h3>The most valuable room you're in — <em>or your money back.</em></h3>
+      <p>Join, come to the sessions, use the pods and the tools. If within your first 30 days the Guild isn't the most valuable room you belong to, tell us and we'll refund you in full. The risk is ours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section>
+  <div class="wrap center">
+    <div class="lbl rv">Membership</div>
+    <h2 class="big rv d1">One room. One <em>bar.</em></h2>
+  </div>
+  <div class="wrap">
+    <div class="price">
+      <div class="pcard feat rv">
+        <div class="pt">AI Guild</div>
+        <div class="amt">$5,000<small> / year</small></div>
+        <div class="pn">The network, the sessions, the tools, the people.</div>
+        <ul>
+          <li>Weekly frontier sessions + monthly expert</li>
+          <li>Mastermind pods &amp; project groups</li>
+          <li>The AI tools wall — 20–30% off</li>
+          <li>Demo days &amp; talent matching</li>
+          <li>The founding faces &amp; the full room</li>
+        </ul>
+      </div>
+      <div class="pcard rv d1">
+        <div class="pt">Mastery fast-track</div>
+        <div class="amt">$2,500<small> / first year</small></div>
+        <div class="pn">For AI Mastery graduates who qualify.</div>
+        <ul>
+          <li>Everything in the AI Guild</li>
+          <li>Application fast-tracked in ~24 hrs</li>
+          <li>50% off your first year</li>
+          <li>Renews at full price</li>
+        </ul>
+      </div>
+    </div>
+    <p class="scarcity rv">The founding cohort is capped at <b>~1,000 seats</b>, with a <b>10% acceptance rate</b>. Founding pricing is locked for life — it rises for every cohort after.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap center">
+    <div class="lbl rv">Questions</div>
+    <h2 class="big rv d1">Before you <em>apply.</em></h2>
+  </div>
+  <div class="wrap">
+    <div class="faq rv">
+      <details open><summary>What is the AI Guild?<span class="pm">+</span></summary><p>A private, application-only network for people building with AI. Not a course — a room of founders, operators and creators, kept on the frontier through weekly sessions, expert drops, mastermind pods, tool deals and demo days.</p></details>
+      <details><summary>Who gets in?<span class="pm">+</span></summary><p>Founders, operators, creators and rising AI voices who are actively building. Everyone applies — being qualified isn't enough. We vet every applicant; the bar is what makes the room worth being in.</p></details>
+      <details><summary>How does the application work?<span class="pm">+</span></summary><p>Apply for free. A member of our team reviews your application personally, and we'll reach out for a short conversation. AI Mastery graduates are fast-tracked within ~24 hours.</p></details>
+      <details><summary>What does membership include?<span class="pm">+</span></summary><p>Weekly frontier sessions, a monthly marquee expert, mastermind pods and project groups, the AI tools wall (20–30% off), demo-day access, talent matching, and the full network of founding faces.</p></details>
+      <details><summary>How much does it cost?<span class="pm">+</span></summary><p>$5,000 a year. AI Mastery graduates who qualify pay $2,500 for their first year, then renew at full price. Founding-cohort pricing is locked for life.</p></details>
+      <details><summary>What if it's not for me?<span class="pm">+</span></summary><p>You're covered by our 30-day promise — if the Guild isn't the most valuable room you belong to, we'll refund you in full.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY CTA -->
+<section id="apply" class="center">
+  <div class="wrap">
+    <div class="lbl rv" style="color:var(--gold)">Founding cohort · Application only</div>
+    <h2 class="big rv d1" style="color:var(--paper)">The room is forming <em>now.</em></h2>
+    <p class="lead rv d2">Free to apply. Reviewed by a human. Seats are limited — the founding cohort closes once it's full.</p>
+    <div class="cta-row rv d2" style="justify-content:center;margin-top:30px;">
+      <a class="cta" href="apply.html" style="background:#37d3a9;color:#04110c;">Begin Your Application</a>
+    </div>
+    <p class="filmnote rv" style="color:#8a948c;margin-top:18px;">Takes about 5 minutes · Mastery grads fast-tracked in ~24 hours</p>
+  </div>
+</section>
+
+<footer>The AI Guild · A Mindvalley Network · Prototype — internal review</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>20);
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.rv:not(.in)').forEach(el=>io.observe(el));
+
+  function submitGuild(e){
+    e.preventDefault();
+    document.getElementById('guildForm').style.display='none';
+    const ok=document.getElementById('okMsg');ok.style.display='block';
+    ok.scrollIntoView({behavior:'smooth',block:'center'});
+    return false;
+  }
+</script>
+</body>
+</html>
