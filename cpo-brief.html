@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPO Brief — The AI Guild</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,0,600;9..144,0,700;9..144,1,400;9..144,1,500;9..144,1,600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f3ec; --paper-2:#efe9dd; --card:#ffffff; --ink:#16150f; --ink-2:#43403a;
+    --soft:#6a665d; --line:#e0d8c8; --line-2:#cdc3af;
+    --accent:#0e6b62; --gold:#a9772a; --rust:#a4452e; --ink-deep:#11140f;
+    --use:#0e6b62; --build:#a9772a; --defer:#9a8f7c;
+    --display:'Fraunces',Georgia,serif; --body:'Archivo',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.58;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  ::selection{background:var(--accent);color:#fff;}
+  .wrap{max-width:980px;margin:0 auto;padding:0 30px;}
+
+  nav.top{border-bottom:1px solid var(--line);background:rgba(247,243,236,.9);backdrop-filter:blur(12px);position:sticky;top:0;z-index:40;}
+  nav.top .inner{display:flex;align-items:center;justify-content:space-between;padding:17px 30px;max-width:980px;margin:0 auto;}
+  .logo{font-family:var(--display);font-weight:600;font-size:1.12rem;}
+  .logo em{font-style:italic;color:var(--gold);}
+  .back{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--soft);text-decoration:none;}
+  .back:hover{color:var(--accent);}
+
+  h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;line-height:1.05;}
+  h1 em,h2 em{font-style:italic;color:var(--gold);font-weight:500;}
+  .eyebrow{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:700;}
+
+  header.head{padding:58px 0 30px;border-bottom:2px solid var(--ink);}
+  header.head h1{font-size:clamp(2.4rem,5.5vw,3.8rem);margin:16px 0 16px;}
+  header.head p{color:var(--ink-2);font-size:1.08rem;max-width:62ch;}
+  .legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:22px;font-size:.8rem;}
+  .legend span{display:inline-flex;align-items:center;gap:7px;font-weight:600;}
+  .dotc{width:10px;height:10px;border-radius:50%;}
+  .du{background:var(--use);} .db{background:var(--build);} .dd{background:var(--defer);}
+
+  section{padding:48px 0;border-bottom:1px solid var(--line);}
+  .lbl{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px;}
+  h2{font-size:clamp(1.6rem,3.4vw,2.3rem);margin-bottom:8px;}
+  .sub{color:var(--soft);font-size:.98rem;margin-bottom:20px;max-width:66ch;}
+  p{color:var(--ink-2);max-width:68ch;margin-bottom:12px;}
+  p strong{color:var(--ink);font-weight:600;}
+
+  .tag{display:inline-block;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;border-radius:100px;padding:3px 9px;vertical-align:middle;}
+  .t-use{background:#0e6b6218;color:var(--use);} .t-build{background:#a9772a20;color:var(--build);} .t-defer{background:#9a8f7c22;color:var(--defer);}
+
+  /* flow */
+  .flow{display:flex;flex-direction:column;gap:0;margin-top:20px;}
+  .fstep{display:grid;grid-template-columns:42px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--line);}
+  .flow .fstep:first-child{border-top:none;}
+  .fstep .fn{font-family:var(--display);font-style:italic;color:var(--gold);font-size:1.4rem;}
+  .fstep h4{font-size:1.1rem;color:var(--ink);font-weight:700;margin-bottom:4px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  .fstep p{margin:0;font-size:.94rem;max-width:64ch;}
+  .fstep .tool{font-size:.8rem;color:var(--soft);margin-top:5px;}
+  .fstep .tool b{color:var(--ink);}
+
+  /* room mock */
+  .room{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px;}
+  .rc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;}
+  .rc h4{font-size:1.02rem;color:var(--ink);font-weight:700;margin-bottom:5px;display:flex;gap:8px;align-items:center;}
+  .rc p{font-size:.9rem;margin:0;}
+
+  /* rhythm */
+  .rhythm{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;}
+  .rcol{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;}
+  .rcol h3{font-size:1.15rem;margin-bottom:14px;font-family:var(--body);font-weight:700;}
+  .rcol .ri{padding:10px 0;border-top:1px solid var(--line);}
+  .rcol .ri:first-of-type{border-top:none;}
+  .rcol .ri small{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700;}
+  .rcol .ri b{display:block;font-size:.95rem;color:var(--ink);}
+  .rcol .ri span{font-size:.86rem;color:var(--soft);}
+
+  /* dashboard list */
+  .dash{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px;}
+  .di{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;}
+  .di b{display:block;font-size:.96rem;color:var(--ink);margin-bottom:3px;}
+  .di span{font-size:.85rem;color:var(--soft);}
+
+  /* table */
+  table{width:100%;border-collapse:collapse;margin-top:16px;font-size:.9rem;}
+  th{text-align:left;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700;padding:9px 10px;border-bottom:2px solid var(--line);}
+  td{padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2);}
+  td:first-child{color:var(--ink);font-weight:600;}
+
+  /* integration */
+  .int{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px;}
+  .icol{border:1px solid var(--line);border-radius:16px;padding:22px;background:var(--card);}
+  .icol .ih{font-family:var(--display);font-weight:600;font-size:1.2rem;margin-bottom:4px;}
+  .icol .role{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:12px;}
+  .icol ul{list-style:none;}
+  .icol li{font-size:.86rem;color:var(--ink-2);padding:6px 0 6px 16px;position:relative;}
+  .icol li::before{content:"";position:absolute;left:0;top:13px;width:5px;height:5px;border-radius:50%;background:var(--accent);}
+
+  .scope{background:var(--ink-deep);color:var(--paper);border-radius:16px;padding:30px 32px;margin-top:20px;}
+  .scope h3{color:var(--paper);font-size:1.3rem;margin-bottom:12px;}
+  .scope h3 em{color:var(--gold);}
+  .scope p{color:#cdd4cb;max-width:64ch;}
+  .scope .cut{font-size:.9rem;color:#9fae9f;margin-top:10px;}
+  .scope .cut b{color:var(--paper);}
+
+  ul.q{list-style:none;margin-top:8px;}
+  ul.q li{padding:13px 0 13px 28px;position:relative;border-bottom:1px solid var(--line);color:var(--ink-2);font-size:.96rem;}
+  ul.q li::before{content:"?";position:absolute;left:0;top:12px;font-family:var(--display);font-style:italic;font-weight:600;color:var(--rust);font-size:1.15rem;}
+  ul.q li b{color:var(--ink);}
+
+  footer{padding:36px 0;color:var(--soft);font-size:.78rem;}
+  @media(max-width:720px){.room,.rhythm,.dash,.int{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="inner">
+    <div class="logo">The AI <em>Guild</em></div>
+    <a class="back" href="index.html">← Hub</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="head">
+    <div class="eyebrow">CPO Brief · MVP v1 to debate</div>
+    <h1>CPO <em>Brief.</em></h1>
+    <p>The vision is in the <a href="guild-proposal.html" style="color:var(--accent)">proposal</a>. This is the level down: exactly what a member experiences, what we run, and what we have to build on FinerMinds to ship v1. Opinionated on purpose — so we can debate it and then get it done.</p>
+    <div class="legend">
+      <span><i class="dotc du"></i> Use FinerMinds today</span>
+      <span><i class="dotc db"></i> Build for MVP</span>
+      <span><i class="dotc dd"></i> Defer (post-MVP)</span>
+    </div>
+  </header>
+
+  <!-- THE FLOW -->
+  <section>
+    <div class="lbl">The flow</div>
+    <h2>From "Apply" to inside the room</h2>
+    <p class="sub">The end-to-end path. Note where it's automated vs. a human, and the tool behind each step.</p>
+    <div class="flow">
+      <div class="fstep"><div class="fn">1</div><div>
+        <h4>Apply — no money taken <span class="tag t-use">live page</span></h4>
+        <p>Member applies on the public page. Free. The form must actually capture — right now it's a prototype.</p>
+        <div class="tool"><b>Build:</b> wire the application form → <b>Airtable</b> (the review CRM). ~half a day.</div>
+      </div></div>
+      <div class="fstep"><div class="fn">2</div><div>
+        <h4>Review &amp; vetting <span class="tag t-build">build (light)</span></h4>
+        <p>A concierge reviews each application in Airtable: Approve / Reject / Needs-call. Mastery grads flagged for the 24h fast-track. Borderline/external → short call (Calendly).</p>
+        <div class="tool"><b>Build:</b> an Airtable view + simple status workflow + canned accept/reject emails. Human in the loop — no AI decisioning in v1.</div>
+      </div></div>
+      <div class="fstep"><div class="fn">3</div><div>
+        <h4>Payment link <span class="tag t-build">build</span></h4>
+        <p>On approval, member gets a payment link. $5,000/yr (or $2,500 first-year for Mastery grads). Payment is the trigger for access.</p>
+        <div class="tool"><b>Build:</b> <b>Stripe payment link</b> (or MV checkout) per tier. Decide: charge via MV commerce or standalone Stripe? <em>(open debate)</em></div>
+      </div></div>
+      <div class="fstep"><div class="fn">4</div><div>
+        <h4>Access to FinerMinds <span class="tag t-build">build (automation)</span></h4>
+        <p>Payment success → member is invited into the AI Guild space on FinerMinds.</p>
+        <div class="tool"><b>Use + build:</b> FM <b>email/CSV invite</b> exists; automate the "paid → invite" trigger (Stripe webhook → FM invite via API/Zapier). For v1 this can even be manual daily.</div>
+      </div></div>
+      <div class="fstep"><div class="fn">5</div><div>
+        <h4>Onboarding — the first session <span class="tag t-build">build · the one true gap</span></h4>
+        <p>The make-or-break moment. New member is routed to: complete profile + set a goal → meet the AI Guild Master → join one pod → post a first intro → get matched to 3 people.</p>
+        <div class="tool"><b>Build:</b> a "Start Here" onboarding flow. MVP-light = a pinned checklist + auto-DM + "Members to Meet" intros. This is the single most important thing to build.</div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- DAY 1 -->
+  <section>
+    <div class="lbl">Inside FinerMinds</div>
+    <h2>What a member sees on <em>Day 1</em></h2>
+    <p class="sub">The room layout when they walk in. Most of this exists on FinerMinds today — which is why MVP is achievable.</p>
+    <div class="room">
+      <div class="rc"><h4>The AI Guild space <span class="tag t-use">live</span></h4><p>One branded community space. Banner + pinned "Start Here" + this week's focus.</p></div>
+      <div class="rc"><h4>Calendar of events <span class="tag t-use">live</span></h4><p>FM Events, populated: weekly frontier session, monthly expert, next demo day. Members RSVP.</p></div>
+      <div class="rc"><h4>The activity feed <span class="tag t-use">live</span></h4><p>Daily prompt, member wins, discussion. Where the room feels alive.</p></div>
+      <div class="rc"><h4>Pods / sub-groups <span class="tag t-use">live</span></h4><p>Join a pod — vibe-coding, automation, growth. FM sub-groups cover this in v1.</p></div>
+      <div class="rc"><h4>The AI Guild Master <span class="tag t-build">build · BlinkLife</span></h4><p>A chat that coaches, answers in the authors' frameworks, and runs a daily accountability check-in. Powered by BlinkLife.</p></div>
+      <div class="rc"><h4>Members &amp; "Members to Meet" <span class="tag t-use">live</span></h4><p>Directory + smart intros by shared interest — the social-graph spine for retention.</p></div>
+      <div class="rc"><h4>Document library <span class="tag t-use">live</span></h4><p>Session replays, the tools list, resources — with AI search.</p></div>
+      <div class="rc"><h4>Challenges <span class="tag t-defer">v1 = manual</span></h4><p>Run as a sub-group + pinned post + tracking thread. The native challenge feature comes post-MVP.</p></div>
+    </div>
+  </section>
+
+  <!-- RHYTHM -->
+  <section>
+    <div class="lbl">The rhythm</div>
+    <h2>How it actually runs, day to day</h2>
+    <div class="rhythm">
+      <div class="rcol">
+        <h3>The member</h3>
+        <div class="ri"><small>Daily</small><b>AI Guild Master check-in</b><span>"What did you ship / try today?" — accountability + a nudge to the right post or pod.</span></div>
+        <div class="ri"><small>Daily</small><b>The feed</b><span>React, post a win, answer the prompt.</span></div>
+        <div class="ri"><small>Weekly</small><b>Frontier session</b><span>Live, practical — what dropped this week. Plus their pod.</span></div>
+        <div class="ri"><small>Monthly</small><b>Expert + demo day</b><span>The marquee guest and first-look at a new tool.</span></div>
+      </div>
+      <div class="rcol">
+        <h3>The Guild Master</h3>
+        <div class="ri"><small>Daily</small><b>Welcome + reply + rescue</b><span>Greet new joins, react in the feed, nudge anyone quiet 7+ days (AI-assisted).</span></div>
+        <div class="ri"><small>Weekly</small><b>Run the session + post</b><span>Host the frontier session, post the replay, run a poll, seed the pods.</span></div>
+        <div class="ri"><small>Weekly</small><b>Harvest wins</b><span>Capture results as case studies — the fuel that sells the next member.</span></div>
+        <div class="ri"><small>Monthly</small><b>Book the expert + demo</b><span>Line up the guest and the tool demo against the calendar.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GM DASHBOARD -->
+  <section>
+    <div class="lbl">What we have to build</div>
+    <h2>The Guild Master cockpit</h2>
+    <p class="sub">The GM can't run the room blind. Here's the minimum they need to see. MVP = lean on FinerMinds' native stats + invite-status, with a thin custom view (Airtable/Retool) for the rest. A full custom dashboard is post-MVP.</p>
+    <div class="dash">
+      <div class="di"><b>New joins to welcome <span class="tag t-use">FM</span></b><span>Who joined this week + whether they've activated.</span></div>
+      <div class="di"><b>At-risk / quiet members <span class="tag t-build">build</span></b><span>No activity in 7 days — the rescue list. Highest-leverage retention save.</span></div>
+      <div class="di"><b>Upcoming events + RSVPs <span class="tag t-use">FM</span></b><span>Who's coming, who to remind.</span></div>
+      <div class="di"><b>Engagement pulse <span class="tag t-use">FM</span></b><span>Active members, posts, comments — weekly.</span></div>
+      <div class="di"><b>Content suggestions <span class="tag t-build">build · BlinkLife</span></b><span>What to post / promote this week, from transcripts + the calendar.</span></div>
+      <div class="di"><b>Wins to harvest <span class="tag t-build">build (light)</span></b><span>Members reporting results → testimonial prompts.</span></div>
+      <div class="di"><b>Applications pending <span class="tag t-build">Airtable</span></b><span>The review queue, if the GM also vets.</span></div>
+      <div class="di"><b>Revenue / retention <span class="tag t-use">API</span></b><span>Members, renewals, churn — pulled via FM API.</span></div>
+    </div>
+  </section>
+
+  <!-- FM FEATURES -->
+  <section>
+    <div class="lbl">The FinerMinds requirement</div>
+    <h2>Which FM tools we need to start</h2>
+    <p class="sub">Straight answer to the CPO: most of MVP runs on what FinerMinds already has. Here's the full split.</p>
+    <table>
+      <thead><tr><th>Capability</th><th>Status</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td>Branded space, feed, sub-groups</td><td><span class="tag t-use">Use today</span></td><td>The room, pods, discussion.</td></tr>
+        <tr><td>Events / calendar</td><td><span class="tag t-use">Use today</span></td><td>Sessions, expert, demo day + RSVP.</td></tr>
+        <tr><td>1:1 / group chat</td><td><span class="tag t-use">Use today</span></td><td>Welcomes, pod chat, the personal layer.</td></tr>
+        <tr><td>Profiles + "Members to Meet"</td><td><span class="tag t-use">Use today</span></td><td>The social graph + matching.</td></tr>
+        <tr><td>Document library + AI search</td><td><span class="tag t-use">Use today</span></td><td>Replays, resources, the tools list.</td></tr>
+        <tr><td>Email/CSV invites + status, stats, API</td><td><span class="tag t-use">Use today</span></td><td>Onboarding waves + the GM's data.</td></tr>
+        <tr><td>Apply → review → pay → access automation</td><td><span class="tag t-build">Build for MVP</span></td><td>Airtable + Stripe + invite trigger. The commerce spine.</td></tr>
+        <tr><td>Week-one onboarding / activation flow</td><td><span class="tag t-build">Build for MVP</span></td><td>The one true gap. Critical for a paid tier.</td></tr>
+        <tr><td>AI Guild Master (member-facing)</td><td><span class="tag t-build">Build for MVP</span></td><td>Powered by BlinkLife. Can start "lite."</td></tr>
+        <tr><td>Guild Master cockpit</td><td><span class="tag t-build">Build (thin)</span></td><td>At-risk list + content suggestions over FM stats.</td></tr>
+        <tr><td>Native challenges, Spark points, ranks/levels</td><td><span class="tag t-defer">Defer</span></td><td>Run challenges manually in v1; gamification post-MVP.</td></tr>
+        <tr><td>Progress cards, monthly recap, demand map</td><td><span class="tag t-defer">Defer</span></td><td>Growth + insight layer — after retention is proven.</td></tr>
+        <tr><td>Affiliate marketplace</td><td><span class="tag t-defer">Defer</span></td><td>Second revenue line, later.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- INTEGRATION -->
+  <section>
+    <div class="lbl">The architecture</div>
+    <h2>FinerMinds × MV platform × BlinkLife</h2>
+    <p class="sub">Three systems, three jobs. Keeping them clean is what makes the MVP buildable.</p>
+    <div class="int">
+      <div class="icol">
+        <div class="ih">FinerMinds</div>
+        <div class="role">The home</div>
+        <ul>
+          <li>Where the community lives</li>
+          <li>Space, feed, pods, events, chat</li>
+          <li>Profiles, library, member data</li>
+          <li>Hosts the AI Guild Master</li>
+        </ul>
+      </div>
+      <div class="icol">
+        <div class="ih">MV Platform</div>
+        <div class="role">Commerce &amp; identity</div>
+        <ul>
+          <li>Sells the Guild (checkout / Stripe)</li>
+          <li>Verifies AI Mastery grads → fast-track + discount</li>
+          <li>Membership entitlement</li>
+          <li>Open: SSO into FM, or separate FM login?</li>
+        </ul>
+      </div>
+      <div class="icol">
+        <div class="ih">BlinkLife</div>
+        <div class="role">The AI brain</div>
+        <ul>
+          <li>Powers the AI Guild Master</li>
+          <li>Trained on program transcripts + member context</li>
+          <li>Runs accountability + content suggestions</li>
+          <li>Open: lives inside FM, or linked tool?</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCOPE -->
+  <section>
+    <div class="lbl">My recommendation</div>
+    <h2>The MVP in one line</h2>
+    <div class="scope">
+      <h3>Ship the room on FinerMinds-as-is + three new builds: <em>commerce flow, week-one onboarding, and a "lite" AI Guild Master.</em></h3>
+      <p>Run everything else manually (challenges, vetting, content). Prove that paid members activate in week one and stay. Then build the gamification, marketplace and full AI/dashboard once retention is proven.</p>
+      <p class="cut"><b>Deliberately cut from v1:</b> native challenges, Spark/ranks, progress cards, monthly recap, demand map, affiliate marketplace, full custom GM dashboard, SSO. None of them are needed to prove the core loop.</p>
+    </div>
+  </section>
+
+  <!-- DEBATES -->
+  <section style="border-bottom:none;">
+    <div class="lbl">Let's debate</div>
+    <h2>The open questions</h2>
+    <ul class="q">
+      <li><b>Commerce:</b> charge through MV checkout, or a standalone Stripe link for speed in v1?</li>
+      <li><b>Access:</b> SSO from MV into FinerMinds, or provision a separate FM account on payment? (Manual invite is fine for v1.)</li>
+      <li><b>AI Guild Master in v1?</b> It's the moat but the heaviest build. Ship a "lite" version (transcript Q&amp;A + accountability nudges) now, or hold it to v1.1 and run human-concierge-heavy at launch?</li>
+      <li><b>BlinkLife integration:</b> does it live <em>inside</em> FinerMinds, or as a linked tool members open alongside? What's the real integration effort?</li>
+      <li><b>GM dashboard:</b> thin Airtable/Retool view over FM stats for v1, or invest in a custom build now?</li>
+      <li><b>Challenges:</b> agree they're manual in v1, or is the native feature a must-have for the heartbeat?</li>
+      <li><b>Who runs it at launch:</b> the human Guild Master + the concierge reviewing applications — who are they?</li>
+    </ul>
+  </section>
+
+  <footer>The AI Guild · CPO Brief · MVP v1 · Mindvalley × FinerMinds · Internal — for discussion</footer>
+</div>
+</body>
+</html>
